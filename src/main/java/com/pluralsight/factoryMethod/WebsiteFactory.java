@@ -9,12 +9,12 @@ public class WebsiteFactory {
 
     //This should be static. so that we can call WebsiteFactory.getWebsite("");
     //Notice that based on the input parameter, different subclass is created and returned.
-    public static Website getWebsite(String siteType) {
+    public static Website getWebsite(WebsiteType siteType) {
         switch (siteType) {
-            case "blog" : {
+            case BLOG: {
                 return new Blog();
             }
-            case "shop" : {
+            case SHOP: {
                 return new Shop();
             }
             default: {
@@ -32,6 +32,6 @@ public class WebsiteFactory {
 //This pattern takes out the responsibility of the instantiation of a class from the client program to the factory class.
 
 //Factory Design Pattern Advantages: -
-    // - Factory design pattern provides approach to code for interface rather than implementation.
-    // - Factory pattern removes the instantiation of actual implementation classes from client code. Factory pattern makes our code more robust, less coupled and easy to extend. For example, we can easily change shop class implementation because client program is unaware of this.
-    // - Factory pattern provides abstraction between implementation and client classes through inheritance.
+// - Factory design pattern provides approach to code for interface rather than implementation.
+// - Factory pattern removes the instantiation of actual implementation classes from client code. Factory pattern makes our code more robust, less coupled and easy to extend. For example, we can easily change shop class implementation because client program is unaware of this.
+// - Factory pattern provides abstraction between implementation and client classes through inheritance.
