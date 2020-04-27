@@ -19,10 +19,12 @@ public class DecoratorDemo2 {
         System.out.println(sandwich1.make());
 
         //We are creating different sandwich without creating the object everytime for SimpleSandwich
+        //We dont have to create new object everytime to add new functionality
         Sandwich sandwich2 = new PaneerDecorator(sandwich);
         System.out.println(sandwich2.make());
 
         //We are creating different sandwich without creating the object everytime of SimpleSandwich
+        //We dont have to create new object everytime to add new functionality
         Sandwich sandwich3 = new DressingDecorator(sandwich);
         System.out.println(sandwich3.make());
     }
