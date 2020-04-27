@@ -41,14 +41,15 @@ public class DbSingletonDerby extends BreakSingleton2 {
         return instance;
     }
 
-    public Connection getConn() {
+    public Connection getConn() throws SQLException {
 
-        if (conn == null) {
+        if (conn == null || conn.isClosed()) {              //Make sure to have both check. (Faced a lot of issue due to absence of second check)
             synchronized (DbSingletonDerby.class) {
-                if (conn == null) {
+                if (conn == null || conn.isClosed()) {
                     String dbUrl = "jdbc:derby:codejava/webdb;create=true";
                     try {
                         conn = DriverManager.getConnection(dbUrl);
+                        System.out.println("Connection established");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

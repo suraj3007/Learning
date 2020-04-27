@@ -26,7 +26,7 @@ public class JdbcwithoutFacade {
             sta = conn.createStatement();
             int count = sta.executeUpdate("Insert INTO Address (ID, StreetName, City) " +
                     "VALUES (123, 'Virar', 'Mumbai')");
-            System.out.println(count + " records created");
+            System.out.println(count + " record(s) created");
             sta.close();
 
             //Fetch from table

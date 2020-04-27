@@ -60,15 +60,19 @@ public class JdbcFacade {
             Connection conn = instance.getConn();
             Statement sta = conn.createStatement();
 
-            ResultSet rs = sta.executeQuery("SELECT * from Address");
-            System.out.println(rs.getString(1) + "" + rs.getString(2) + "" + rs.getString(3));
+            ResultSet rs = sta.executeQuery("SELECT * FROM Address");
 
-            Address address = new Address();
-            address.setId(rs.getString(1));
-            address.setStreetName(rs.getString(2));
-            address.setCity(rs.getString(3));
+            while (rs.next()) {
+                System.out.println(rs.getString(1) + " " + rs.getString(2) +
+                        " " + rs.getString(3));
 
-            addresses.add(address);
+                Address address = new Address();
+                address.setId(rs.getString(1));
+                address.setStreetName(rs.getString(2));
+                address.setCity(rs.getString(3));
+
+                addresses.add(address);
+            }
 
             rs.close();
             sta.close();
