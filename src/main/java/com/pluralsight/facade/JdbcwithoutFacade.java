@@ -4,6 +4,11 @@ import main.java.com.pluralsight.singleton.DbSingletonDerby;
 
 import java.sql.*;
 
+/**
+ * Without Facade pattern, the client is getting heavier.
+ * Create, fetch and insert operations are performed and there is no abstraction.
+ * Code visibilty is there that we are using Singleton pattern  and what different spl statement we are exceuting
+ */
 public class JdbcwithoutFacade {
 
     public static void main(String[] args) {

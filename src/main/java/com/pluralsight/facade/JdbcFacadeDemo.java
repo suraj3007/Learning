@@ -2,6 +2,11 @@ package main.java.com.pluralsight.facade;
 
 import java.util.List;
 
+/**
+ * With Facade pattern: -
+ * Client side is light weight.
+ * Implementation logic is unknown.
+ */
 public class JdbcFacadeDemo {
 
     public static void main(String[] args) {

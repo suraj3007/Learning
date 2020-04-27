@@ -9,6 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Facade pattern :
+ * Different method for different type of operations
+ * create, insert, fetch and drop operations
+ */
 public class JdbcFacade {
     DbSingletonDerby instance = null;
 
