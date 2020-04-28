@@ -45,7 +45,7 @@ public class DbSingletonDerby extends BreakSingleton2 {
 
         if (conn == null || conn.isClosed()) {              //Make sure to have both check. (Faced a lot of issue due to absence of second check)
             synchronized (DbSingletonDerby.class) {
-                if (conn == null || conn.isClosed()) {
+                if (conn == null || conn.isClosed()) {      //Make sure to have both check. (Faced a lot of issue due to absence of second check)
                     String dbUrl = "jdbc:derby:codejava/webdb;create=true";
                     try {
                         conn = DriverManager.getConnection(dbUrl);
