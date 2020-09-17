@@ -49,7 +49,7 @@ public class JumpSearch {
     static int exponentialSearch(int arr[],
                                  int n, int x)
     {
-        // If x is present at firt location itself
+        // If x is present at first location itself
         if (arr[0] == x)
             return 0;
 
