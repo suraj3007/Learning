@@ -15,21 +15,11 @@ public class InfixToPostfix {
         }
     };
 
-    static int prec (char c) {
-
-        switch (c) {
-            case '+' :
-            case '-' : return 1;
-        }
-
-        return -1;
-    }
-
     public static void main(String[] args) {
         // E.g: - ((A+B)*C-D)*E
         //((A*B)+(C*D)+E)
 
-        String exp = "((A+B)*C-D)*E"; //ABC*+
+        String exp = "((A+B)*C-D)*E";   //AB+C*D-E*
         String result = infixToPostfixConversion(exp);
         System.out.println("Postfix Expression : " + result);
     }

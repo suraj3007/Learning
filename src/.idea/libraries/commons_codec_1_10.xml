@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.10">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/commons-codec-1.10.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/commons-collections4-4.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/curvesapi-1.04.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/poi-3.17.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/poi-ooxml-3.17.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/poi-ooxml-schemas-3.17.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/stax-api-1.0.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jar_files_poi/xmlbeans-2.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -4,21 +4,20 @@ import java.util.Objects;
 
 public class LinkedList {
 
-    Node head;
+    public Node head;
 
-    static class Node {
-        int data;
-        Node next;
+    public static class Node {
+        public int data;
+        public Node next = null;
 
-        public Node(int data, Node next) {
+        public Node(int data) {
             this.data = data;
-            this.next = null;
         }
     }
 
     //Insertion
-    protected static void insert(LinkedList list, int i) {
-        Node newNode = new Node(i, null);
+    public static void insert(LinkedList list, int i) {
+        Node newNode = new Node(i);
 
         //Case 1 : Insert as first element
         if (Objects.isNull(list.head)) {
@@ -116,7 +115,7 @@ public class LinkedList {
     }
 
     //Print List
-    protected static void printList(LinkedList list) {
+    public static void printList(LinkedList list) {
         Node currentNode = list.head;
         System.out.print("LinkedList values are : ");
 
@@ -126,7 +125,6 @@ public class LinkedList {
         }
         System.out.println();
     }
-
 
     //Reverse LinkedList
     private static void reverseLinkedList(LinkedList list) {
@@ -138,19 +136,32 @@ public class LinkedList {
             System.out.println("Only one element is present. So not reversing the list");
             return;
         } else {
-            nextNode = currentNode.next;
-            prevNode = currentNode;
-            currentNode.next = null;
-
-            while (Objects.nonNull(nextNode)) {
-                currentNode = nextNode;
+            while (currentNode != null) {
                 nextNode = currentNode.next;
                 currentNode.next = prevNode;
                 prevNode = currentNode;
+                currentNode = nextNode;
             }
-            list.head = currentNode;
+            list.head = prevNode;
             System.out.println("List reversed...");
         }
+    }
+
+    private static void findMiddleElement(Node head) {
+        Node midNode = head;
+        int count = 0;
+
+        while (Objects.nonNull(head)) {
+
+            if (count % 2 == 1) {
+                midNode = midNode.next;
+            }
+            count++;
+            head = head.next;
+        }
+
+        if (Objects.nonNull(midNode))
+            System.out.println("Middle element is : " + midNode.data);
     }
 
     //Main method
@@ -174,6 +185,7 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
         //
         // ******DELETION BY KEY******
         //
@@ -185,6 +197,8 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
+
         // Delete node with value 4
         // In this case the key is present ***in the middle***
         deleteByKey(list, 4);
@@ -192,12 +206,16 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
+
         // Delete node with value 10
         // In this case the key is ***not present***
         deleteByKey(list, 10);
 
         // Print the LinkedList
         printList(list);
+
+        findMiddleElement(list.head);
 
         //
         // ******DELETION AT POSITION******
@@ -210,6 +228,8 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
+
         // Delete node at position 2
         // In this case the key is present ***in the middle***
         deleteAtPosition(list, 2);
@@ -217,6 +237,7 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
         // Delete node at position 10
         // In this case the key is ***not present***
         deleteAtPosition(list, 10);
@@ -224,9 +245,65 @@ public class LinkedList {
         // Print the LinkedList
         printList(list);
 
+        findMiddleElement(list.head);
         //Reverse the LinkedList
         reverseLinkedList(list);
 
         printList(list);
+
+        findMiddleElement(list.head);
+
+    }
+}
+
+
+class LinkedList2 {
+
+    static Node head;
+
+    static class Node {
+
+        int data;
+        Node next;
+
+        Node(int d) {
+            data = d;
+            next = null;
+        }
+    }
+
+    void printList(Node node) {
+        while (node != null) {
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+    }
+
+    void deleteNode(Node node) {
+        Node temp = node.next;
+        node.data = temp.data;
+        node.next = temp.next;
+        System.gc();
+
+    }
+
+    // Driver program to test above functions
+    public static void main(String[] args) {
+        LinkedList2 list = new LinkedList2();
+        list.head = new Node(1);
+        list.head.next = new Node(12);
+        list.head.next.next = new Node(1);
+        list.head.next.next.next = new Node(4);
+        list.head.next.next.next.next = new Node(1);
+
+        System.out.println("Before Deleting ");
+        list.printList(head);
+
+        /* I m deleting the head itself.
+         You can check for more cases */
+        list.deleteNode(list.head.next.next.next.next);
+        System.out.println("");
+        System.out.println("After deleting ");
+        list.printList(head);
     }
 }

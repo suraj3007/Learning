@@ -13,6 +13,7 @@ public class PrimeNumber {
         }
 
         for(int i = 2; i <= Math.sqrt(num); i++){
+//            System.out.println(Math.sqrt(num));
             if(num % i == 0){
                 return false;
             }
@@ -21,17 +22,22 @@ public class PrimeNumber {
     }
 
     public static void main(String[] args) {
-        double num = 18;
-        if(num == 2 || isPrime(num)){
-            System.out.println(num + " is a prime number");
-        }else{
-            System.out.println(num + " is not a prime number");
+        double num = 2;
+
+        System.out.println(isPrime(num) ? num + " is a prime number" : num + " is not a prime number");
+
+        for (int i = 2; i <= num; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
         }
 
-//        List<Integer> primes = new ArrayList<>();
-//        IntStream.range(2, 100)
-//                .filter(n -> primes.parallelStream().noneMatch(p -> n % p == 0))
-//                .forEach(primes::add);
-//        System.out.println(primes);
+        System.out.println();
+
+        List<Integer> primes = new ArrayList<>();
+        IntStream.range(2, 100)
+                .filter(n -> primes.parallelStream().noneMatch(p -> n % p == 0))
+                .forEach(primes::add);
+        System.out.println(primes);
     }
 }
