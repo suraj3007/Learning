@@ -3,14 +3,11 @@ package main.java.dataStructures;
 import java.util.LinkedList;
 import java.util.Iterator;
 
-// This class represents a directed graph using adjacency list
-// representation
+// This class represents a directed graph using adjacency list representation
 public class Graph
 {
     private int V;   // No. of vertices
     private LinkedList<Integer> adj[]; //Adjacency Lists
-
-    LinkedList list = new LinkedList();
 
     // Constructor
     Graph(int v)

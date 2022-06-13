@@ -1,19 +1,17 @@
 package main.java.interview;
 
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class LargestNumberFormed {
 
     public static void main(String[] args) {
-        int[] arr = {7, 8, 4, 0, 2, 9, 5, 4, 2};    //987544220
-        int[] res = new int[arr.length];
-        int max_index = -1;
-
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > arr[i + 1]) {
-                max_index = i;
-            }
-        }
-
+//        List<Integer> numbers = Arrays.asList(7, 8, 4, 0, 2, 9, 5, 4, 2); //987544220
+        List<Integer> numbers = Arrays.asList(10, 68, 97, 9, 21, 12); //99768211210
+        Collections.sort(numbers,
+                (a,b) -> (String.valueOf(b) + a).compareTo((String.valueOf(a) + b)));
+        String ans = numbers.stream().map(Object::toString).collect(Collectors.joining(""));
+        System.out.println(ans);
     }
 }

@@ -92,7 +92,6 @@ public class TreeTraversal {
             }
             temp = queue.poll();
         }
-
     }
 
     private static int findHeightOfTree(Node root) {

@@ -36,7 +36,7 @@ public class BinarySearch {
      * @param x
      * @return
      */
-    int binarySearch(int arr[], int x) {
+    public int binarySearch(int arr[], int x) {
         int low = 0, high = arr.length - 1;
         while (low <= high) {
             int median = low + (high - low) / 2;
