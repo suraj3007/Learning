@@ -1,7 +1,5 @@
 package main.java.learning;
 
-import java.util.Arrays;
-
 public class Example {
     public static int peakElement(int[] arr,int n)
     {
