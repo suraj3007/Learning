@@ -1,0 +1,530 @@
+***************************************************************************************************************************
+Day 1: Arrays
+***************************************************************************************************************************
+
+Problem 1: - Set Matrix Zeroes :
+
+- Use row zero and column zero for indexing. Use boolean flag for handling zeroes in zeroth column (Because it is responsible for row change as well).
+
+row for loop i(This will set indexing as per each matrix value): 
+- Check for each row zeroth column (matrix[i][0] == 0), if it contains zero then set the boolean flag.
+column for loop j: 
+- Iterate through each matrix co-ordinate with column looping start with 1, if matrix[i][j] == 0 then set corresponding row zero and column zero as 0, otherwise move ahead.
+
+Indexes are set. Now, Start setting zeroes: -
+
+Two backward for loop i(row - 1 till 0) & j(column - 1 till 1):
+- **Start setting zeroes from last element of matrix in order to avoid the change in value at (0,0)**
+- Iterate through each matrix co-ordinate, check if corresponding row zero and column zero is 0 (matrix[i][0] == 0 || matrix[0][j] == 0) then set that coordinate as zero (matrix[i][j] = 0) otherwise move backward until column 1.
+- Outside column for loop j, check for flag if its set as true then change the column zero of that row as 0 (matrix[i][0] = 0;), otherwise move to next iteration.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - Pascals triangle : (return List<List<Integer>>) 
+
+- Create 3 Lists : List<List<Integer>> res & List<Integer> row, prev(to point out previous row)
+
+for loop i(handle each row):
+- intialize list row
+for loop j(from 0 till i) -> handle column for that particular row :
+- first & last column value will be 1 (j == 0 || j == i), add 1 to the row else,
+- perform sum from prev list, taking j - 1 and jth element (row.add(prev.get(j - 1) + prev.get(j)))
+
+outside for loop j: 
+- assign row to prev.
+- Add row to res list.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 3: - Next Permutation:
+
+Intuition with steps: -
+- From back there is an increasing sequence even for 1 element or more than 1 element. So, humko break point dhundhna hai from the back where a[i] < a[i + 1].
+Step 1: - Get index i from back where a[i] < a[i + 1] -> Code me ulta condition lagaenge
+
+- Now, we want someone from back again jo current i se jyada ho to arrange in lower rank of sorted order.
+Step 2: - Get index j from back where a[j] > a[i] -> Code me ulta condition lagaenge
+
+- Swap i and j to arrange in lower rank
+Step 3: - Swap index i and j
+
+- Reverse krenge i+1 se end tak in increasing order which will again ensure lower rank of sorted  order
+Step 4: - Reverse string from i + 1 to length - 1
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - Kadane's algorithm (Maximum subarray):
+
+1. Initialize sum = 0 & maxSum = first element of array.
+2. Iterate through each element of an array and add it to sum variable.
+3. 2 if statements: -
+	a. Check if sum > maxSum then maxSum = sum;
+	b. check if sum < 0 then sum = 0; //Reason: Adding on consecutive -ve values will lower down the sum value so no point having sum as -ve number hence re-assign it to 0.
+4. Return maxSum;
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Sort an array of 0's, 1's & 2's (Dutch National flag algorithm is used to sort this in O(N) TC.):
+
+Intuition: -
+- [0 ... low -1] -> 0 (Left side of low pointer will contains 0's)
+- [high + 1 ... n] -> 2 (Right side of high pointer will contains 2's)
+
+Steps: -
+1. Maintain 3 pointers : low, mid, high -> low = mid = 0; high = size - 1
+while(mid <= high) then switch (nums[mid]){}
+2. If mid finds value as 0 -> Swap low with mid & increment both low & mid pointer
+3. If mid finds value as 1 -> Just increment mid pointer
+4. If mid finds value as 2 -> Swap high with mid & decrement high pointer
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Problem 6: - Buy and sell stock:
+
+1. Initialize min = prices[0] and maxProfit = 0;
+2. Loop over each element and check if min > prices[i] then assign min = prices[i], ELSE IF
+3. Check if (prices[i] - min > maxProfit) then assign maxProfit as prices[i] - min within same for loop.
+4. Return maxProfit.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+***************************************************************************************************************************
+
+Day 2: Arrays Part - II
+
+***************************************************************************************************************************
+
+Problem 1: - Rotate Matrix:
+
+-> Intuition: If you see row in rotated output matrix, it is reverse of column
+
+1. Find transpose of a matrix -> Transpose: Column becomes row & row becomes column
+	a. for loop i (0 -> matrix.length) and for loop j (i -> matrix.length) 	(Here j = i because 1st row and 1st column is already transposed. In next iteration, we don't have to start with previous column otherwise values again get swapped.)
+	b. Swap values by using temp and matrix[i][j] = matrix[j][i];
+
+2. reverse each row of a matrix
+	a. for loop i(0 -> matrix.length) and for loop j (0 -> matrix.length/2)
+	b. Swap values by using temp and matrix[i][j] = matrix[i][matrix.length - 1 - j];
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - Merge overlapping subIntervals (returnType = int[][]):
+
+1. Initialize List<int[]> res.
+2. Check for negative scenario is null or of size 0 then return res.toArray(new int[0][])
+3. Sort an array based on start interval: - Arrays.sort(intervals, Comparator.comparingInt(arr -> arr[0]));
+4. Declare start and end as intervals[0][0] & intervals[0][1] respectively.
+5. Iterate through each element and check if n[0] <= end then assign end = Math.max(end, n[1]) **to cover scenarios like [1,7] [3,6]**, ELSE
+6. Add defined/new/previous pair into list: res.add(new int[]{start, end}); Also, re-assign start and end with current looping pair as n[0] & n[1]
+7. Outside for loop, again add the pair(last pair during iteration).
+8. return res.toArray(new int[0][]);
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - Find Duplicate number
+
+1. Linked list cycle method: - Here, we are trying to create a linked list cycle (virtually)
+2. Initialze slow & fast pointer as nums[0].
+3. Then move slow pointer by 1 (slow = nums[slow]) and fast pointer by 2 (fast = nums[nums[fast]]), trying to find the collision point.
+4. Once collided, mark fast pointer as nums[0] to zeroth index value.
+5. Now start moving both the pointer by 1 place (slow = nums[slow]; fast = nums[fast]) and place where they will collide will be a duplicate number.
+
+Intuition: 
+1. For first collision:- Since it is mentioned that duplicate is available, hence cycle is bound to be created and both pointer will collide.
+2. For second collision on duplicate number: - For first collision, number of rounds fast pointer will take will be multiple of actual distance from starting point. So, when we move fast pointer at the start and begin moving both pointer by 1 then both will travel same distance.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Find missing & repeating number: 
+
+Naive approach is creating array of size n+1 and keep marking value as visited which we find in an array. At the end, repeated number count will be more than 1 & missing number count will be 0.
+
+Optimized approach: -
+
+1. Find summation (n * (n + 1 )/2) & summationSquare (n * (n + 1) * (2 * n + 1)) / 6
+2. Iterate over array element and keep decrementing the value from summation & summationSquare as A[i] & A[i] * A[i] respectively.
+3. Find sumNum using formula (summationSquare/summation)
+4. Then, missingNumber will be (int) (summation + sumNum) / 2 & repeatedNumber will be (int) (missingNumber - summation).
+
+Intuition: -
+It will form mathematical equation as X - Y = S' and (X + Y) = P'/s' where X is missing number & Y is repeating number.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+**************************************************************************************************************************
+
+Day 3: Arrays Part - III
+
+**************************************************************************************************************************
+
+Problem 1 (Leetcode): - Search in a 2D matrix for given condition: -
+- Integers in each row are sorted from left to right.
+- The first integer of each row is greater than the last integer of the previous row.
+
+1. Find rowLength = matrix.length & colLength = matrix[0].length
+2. Initialize low = 0 & high = (rowLength * colLength - 1)
+3. Start looping till low <= high & calculate mid as (low + high) / 2
+4. if matrix[mid / colLen][mid % colLen] == target then return true
+5. if target > matrix[mid / colLen][mid % colLen] then low = mid + 1, ELSE
+6. high = mid - 1;
+7. Outside loop return false
+
+Intuition: -
+- If we convert matrix into array then as per above 2 condition array would be sorted. But we cannot use array as it will be counted as extra space. So, we are trying to create an imaginary index and trying to apply binary search algorithm.
+- For finding matrix coordinate, we are using formula row = mid / colLen & column = mid % colLen.
+
+-> Another flavour (GFG): Search in a 2D matrix for given condition: -
+- row and column both are sorted
+
+1. Initialze i = 0 & j = m - 1 (basically last column of first row)
+2. Start looping till (i < n && j >= 0)
+3. if (matrix[i][j] == target) retur true
+4. if (target > matrix[i][j]) then i++; ELSE -> Moving downward
+5. j-- -> Going leftward
+
+Intuition: -
+- We will start with last column of first row because from this coordinate all the value towards left will be smaller and towards down will be larger as per condition.
+- If target is equal to coordinate value then return true.
+- If target is greater than coordinate value then go down row wise ELSE move left (decrementing the column) -> As per intuition 1.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - Pow(X, N): 
+
+**
+ * Logic explanation: -
+ * 2 ^ 10 = (2 * 2) ^ 5 = 4 ^ 5
+ * 4 ^ 5 = 4 * 4 ^ 4 = 4 * 256 (from next step calculation ie ans)
+ * 4 ^ 4 = (4 * 4) ^ 2 = 16 ^ 2
+ * 16 ^ 2 = (16 * 16) ^ 1 = 256 ^ 1
+ * 256 ^ 1 = 256 * 256^0 = 256 (Considered above)
+ *
+ * when n % 2 == 0 then x * x and reduce n by n/2
+ * when n % 2 == 1 then ans * x and reduce n by n - 1
+ *
+ * for negative value: -
+ * 2 ^ (-2) = 1 / (2 ^ 2) so calculate 2 ^ 2 and at last calculate 1/ans
+ */
+
+ 1. Initialize ans = 1.0 & tempN = n
+ 2. if tempN < 0 then tempN = -1 * tempN
+ 3. Start looping till tempN > 0
+ 4. if tempN % 2 == 1 then ans = ans * x and reduce tempN by 1; ELSE
+ 5. x = x * x and reduce tempN by tempN / 2
+ 6. Outside loop check if n < 0 then ans = 1.0 / ans;
+ 7. Return ans
+
+ -------------------------------------------------------------------------------------------------------------------------
+
+ Problem 3: - Majority Element: 
+ Condition: -
+ The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+ 1. Initialize count & majorityElement as 0.
+ 2. Start looping each element (i) and check for 2 conditions.
+ 3. First if statement: if count == 0 then assign majorityElement as that element (i).
+ 4. Second if statement: if majorityElement == i then count += 1 ELSE count -= 1
+ 5. Return majorityElement.
+
+ Intuition: -
+ /**
+ * Here, we have to find an element which occurs more than n/2 times.
+ * First thing to click: - more than n/2 times means there will be only 1 element
+ * Moore voting algorithm.
+ * In problem statement it is mentioned that majority element will be more than n/2 times
+ * It means its count will be greater than combined count of all elements.
+ * So at the end, count of majority element will cancel out each other and still it wont be equal to 0.
+ */
+
+
+Other way: -
+
+1. Define map and start looping over each element (i) and check for 2 conditions.
+2. First if statement: if map contains key then insert key by incrementing value by 1 ELSE insert key with value as 1
+3. Second if statement: if map.get(i) > n/2 then ans = i; //Because as per intuition their will be only 1 element which is greater than n/2 times
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - Majority Element - II: 
+
+/**
+ * This time we have to find all element which occurs more than n/3 times.
+ * First thing to click: - more than n/3 times means there will be only 2 elements or lesser than that
+ * Boyer Moore voting algorithm.
+ * Just like Moore voting algorithm, instead of 1 here we will track for 2 elements.
+ */
+
+ 1. Initialize number1 = -1, number2 = -1, count1 = 0, count2 = 0
+ 2. Loop over elements and keep tracking number1, nummber2 & their counts using 4 if.. else if.. and increment while tracing. If none of conditions meet then decrement both the counter. -> This will ensure assigning 2 numbers which appears more times in sample input.
+ 3. Intialize result list and reassign count1 = count2 = 0.
+ 4. After getting 2 numbers occurred more times in input, start looping again & try finding respective counts using if else loop.
+ 5. Outside for loop, check if count1/count2 is greater than n/3 times using 2 if statements. If yes then add to the list and return.
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Grid unique paths (Google interview question)
+
+-> Naive approach (Using recursion): -
+
+Intuition & steps: -
+You will either move down (row + 1) or go right(col + 1). Keep traversing each path till you get either of 2 conditions and return following (base condition definition): -
+    a. You reach to destination : if (i == m - 1 && j == n - 1) return 1 ELSE If
+    b. Your row/column index goes beyond matrix size : if (i >= m || j >= n) so return 0.
+return uniquePathsUsingRecursion(i + 1, j, m, n) + uniquePathsUsingRecursion(i, j + 1, m, n);
+
+-> Better solution (Using DP): -
+
+Same as above but with some optimization. Here, we will store the result of each recursion path and check while recursion if we have some non-default value for this iteration.
+We will define arr as: int[][] arr = new int[m][n] and pass it as reference everytime.
+You will either move down (row + 1) or go right(col + 1). Keep traversing each path till you get either of 2 conditions and return following (base condition definition): -
+    a. You reach to destination : if (i == m - 1 && j == n - 1) return 1 ELSE If
+    b. Your row/column index goes beyond matrix size : if (i >= m || j >= n) so return 0 ELSe If
+    c. Check if we have iterated this path before: if (arr[i][j] != 0) then return arr[i][j];
+
+return arr[i][j] = uniquePathsUsingRecursion(i + 1, j, m, n) + uniquePathsUsingRecursion(i, j + 1, m, n);
+
+-> Optimized approach (Using combinations): -
+
+Intuition:
+/**
+ * Google interview question : Combination problem
+ * for 2 * 3 matrix:-> m = 2, n = 3
+ * Observation 1: Possible combination: R-R-D, D-R-R, R-D-R : It means 3 steps are required to reach an end point
+ * Observation 2: 2 right direction means col - 1 and 1 downward direction mean row - 1 => col + row - 2
+ * Conclusion: - Out of total steps (m + n - 2) of C to the base either (m - 1) OR (m + n - 2)C(n - 1)
+ */
+
+
+1. For combination problem (N C R), we will calculate N as m + n - 2 and R will either m - 1 or n - 1
+2. Initialize res = 1.0.
+3. Loop (1 to <= R), and apply formula: res = res * (N - R + i) / i;
+4. return (int) res;
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 6: - Reverse Pairs. (Not implemented yet)
+
+----------------------------------------------------------------------------------------------------------------------
+
+**************************************************************************************************************************
+
+Day 4: Arrays Part - IV
+
+**************************************************************************************************************************
+
+Problem 1: - Two Sum:
+
+1. Initialize Map<Integer, Integer> and diff = 0.
+2. Start looping over each element (o -> nums.length) and find diff as target - nums[i];
+3. check if (map.containsKey(diff)) then return new int[]{map.get(diff), i}; ELSE map.put(nums[i], i);
+4. Outside loop return new int[]{-1, -1};
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - Four Sum:
+
+1. Check negative scenario, initialize List<List<Integer>> res = new ArrayList<>() and then sort the arrays.
+2. 2 for loops : i (0 -> n) and j (i + 1 to n) and calculate the diff as target - nums[j] - nums[i];
+3. Initialize low = j + 1 & high = n - 1 and apply binary search
+4. while low < high check if (diff < nums[low] + nums[high]) then high--; ELSE IF (diff > nums[low] + nums[high]) then low++; ELSE
+4. Create a list and add all four numbers i, j, low & high in sequence since we want all distinct quadrets. Then add this list to res list.
+5. Within same while loop, skip duplicate numbers for pointer low & high to search for next combination: -
+    a. while(low < high && nums[low] == list.get(2)) low++;
+    b. while(low < high && nums[high] == list.get(3)) high--;
+    NOTE: list.get(2)) & list.get(3)) is used because we have added low & high at 2nd & 3rd indexes of list. Refer step 4.
+6. Outside while loop and within loop scope of j, skip duplicate numbers for j as well
+    a. while (j + 1 < n && nums[j] == nums[j + 1]) ++j;
+    Here, j will still be pointing to duplicate number, but ++j in for loop will move pointer to next non-duplicate number.
+7. Outside for loop j & within loop scope of i, skip duplicate numbers for i as well
+    a. while (i + 1 < n && nums[i] == nums[i + 1]) ++i;
+    Here, i will still be pointing to duplicate number, but ++i in for loop will move pointer to next non-duplicate number.
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 3: - Longest Consecutive sequence:
+
+Intuition: -
+Here, we are trying to find the  minimal value of the sequence so that we can start checking from that number upto complete sequence available.
+
+1. Create hashset and add all values into Hashset.
+2. Initialize longestStreak, currentNum, currentStreak = 0.
+3. Loop again over all elements and check if **(!hashSet.contains(n - 1))** to get the minimal value of that sequence.
+4. Once we get the minimal value then define currentNum as that number n and currentStreak = 1 within same if statement;
+5. Then start looping while(hashSet.contains(currentNum + 1)) and increment currentNum & currentStreak by 1.
+6. Outside if loop & within for loop, assign longestStreak = Math.max(longestStreak, currentStreak);
+7. return longestStreak;
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - Largest subarray with zero sum
+
+/**
+ * Intuition: Let say we have an array of size 10 and summation required is 15.
+ * If by 4th index we got our summation = 15, it means from 5th to 9th index summation will be zero.
+ * Same logic we are going to apply here. It will be divided into 2 halves.
+ * 1. From start, keep adding values and check if sum == 0, otherwise keep storing sum and index into map.
+ * If we get sum == 0 from the beginning then calculate maxi by i + 1. That will be your first sequence.
+ * 2. Then after every sum, check if it exists in map.
+ * If yes, it means that we received that sum earlier at particular index.
+ * This indicates that after that index till current index, summation is zero as per our intuition above.
+ * So, calculate the sequence length by current index - index of that sum and compare it with maxi.
+ * Don't store this sum and index pair in map, bcoz key already exist and also we want largest sequence.
+ * Otherwise, index will get updated to recent one and we wont be able to get largest sequence.
+ */
+
+ 1. Check negative scenario if length is 0 then return 0.
+ 2. Initialize map and sum = 0, maxi = 0;
+ 3. Start looping over element and keep adding it into sum as sum += arr[i]; and execute above mentioned steps
+    a. if sum == 0 then maxi = i + 1; ELSE
+    b. else if map.containsKey(sum) then maxi = Math.max(maxi, i - map.get(sum)); ELSE
+    c. else map.put(sum, i); //Storing sum & index
+4. Outside loop, return maxi;
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Count number of subarrays with given Xor K: 
+
+Intuition: -
+If prefix XOR is XR and we have some patches which gives XOR as K and remaining XOR as Y then we can say thay Y ^ K = XR.
+This can be reduced as as Y = XR ^ K. Here, we have to find the frequency of such Y's that will ultimately leads to count of such subarrays which will give XOR as K.
+
+Steps (B is target XOR): 
+1. Initialize map & count = 0, xor = 0.
+2. Iterate over each element j and find prefix xor = xor ^ j    //Equation expianed above
+3. Check if (xor == B) then increment count by 1.
+4. Check if (map.containsKey(xor ^ B)) then count += map.get(xor ^ B)
+5. Check if (map.containsKey(xor)) then map.put(xor, map.get(xor) + 1); ELSE
+6. map.put(xor, 1);
+7. Outside loop, return count.
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 6: - Longest substring without repeat:  
+
+Intution/Steps:
+
+**
+ * Keep adding character in a map with its index value till we get non-repeating character
+ * by incrementing right pointer & calculate maxLength.
+ * If we get any repeated character, move left pointer to right + 1 to skip all iterations in between.
+ * Also, repeated character should be within range of considered sequence.
+ * For eg: - tmmxuzt - last char 't' is out of range when 't' first occurred at index 0
+ * for the longest sequence mxuzt. For this longest sequence, left will be at index 2 & right will be at 6.
+ * However, first 't' found at index 0 which is out of range of 2 & 6.
+ * If its not within sequence range then keep it as it is.
+ * Handled by: - -> Math.max(map.get(s.charAt(right)) + 1, left) -> Math.max(1, 2) -> 2 as per above eg.
+ * And update the index of repeated character index as per last occurrence.
+ */
+
+1. Initialize map & left = 0, right = 0, maxLength = 0;
+2. Start looping till (right < s.length()) check if character is available in map using using condition (map.containsKey(s.charAt(right))). If available then assign left as left = Math.max(map.get(s.charAt(right)) + 1, left);
+    This will also handle if character index is available within evaluating range.
+3. Outside if statement but within while loop assign maxLength as Math.max(maxLength, right - left + 1);
+    //This is used to evaluate maximum length.
+4. Keep adding character in map and incrementing right pointer using map.put(s.charAt(right), right++);
+
+----------------------------------------------------------------------------------------------------------------------
+
+**************************************************************************************************************************
+
+Day 5: LinkedList
+
+**************************************************************************************************************************
+
+Problem 1: - Reverse a Linked List
+
+Steps: -
+1. Check for negative scenario if head is null then return null.
+2. Initialize dummy node newHead as null.
+3. Start looping till head != null.
+    a. Assign pointer to next node: ListNode next = head.next;
+    b. Reverse a direction (first iteration to null & then next instance to previous node): head.next = newHead;
+    c. Move dummy node to current/head node (To maintain the previous node address for next iteration): newHead = head;
+    d. Move head node to next node: head = next;
+4. return newHead;
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 2: Find middle of LinkedList:
+
+1. Initialize fast and slow pointer as ListNode fast = head, slow = head;
+2. Start looping until fast != null && fast.next != null
+3. Move slow and fast pointer as 
+    a. slow = slow.next;
+    b. fast = fast.next.next;
+4. return slow;
+
+---------------------------------------------------------------------------------------------------------------------
+
+Problem 3: : Merge two sorted Linked List:
+
+1. If list1 is null then return list2. If list2 is null then return list1.
+2. Make sure that list having smaller value should be marked as list1 (always with different conditions) by using condition if (list1.val >= list2.val) and then swap.
+3. Assign ListNode res = list1;
+4. Start looping till list1 != null && list2 != null and always initialize temp as null. (This temp node will be used to remind last node of previous iteration).
+5. Till list1 has lesser value than list2, assign current node to temp1 & keep incrementing list1 to next value.
+    Again start while loop till list1 != null && list1.val <= list2.val
+    Assign temp as list1 & list1 as list1.next;
+6. Outside inner while loop(will break if l2.val > current l1.val OR list 1 as null. It means next value will be l2.val, hence assigning to temp.next), assign temp.next to list2.  
+7. Swap: to ensure next smaller value of list will marked as list1
+8. Return res
+
+---------------------------------------------------------------------------------------------------------------------
+
+Problem 4: : Remove nth node from the end of LinkedList
+
+Use fast slow pointer to solve this problem.
+
+1. Create a dummy node (startNode) which will hold the address of head (//useful in edge cases like if we have to delete the nth node from back ie first node from start. slow will be at dummy node and by slow.next = slow.next.next; -> will give head next).
+2. Create slow and fast pointers pointing at startNode.
+3. Start loop from (1 to <= n) and move fast pointer by 1 as fast = fast.next;
+4. Start looping till fast.next != null and move both the pointers by 1.
+5. By the time fast will move to null, slow pointer will be at point where next nodes need to be deleted. So, break this link using slow.next = slow.next.next;
+6. return startNode.next;
+
+---------------------------------------------------------------------------------------------------------------------
+
+Problem 5: : Add 2 numbers as LinkedList
+
+1. Create a dummy node to store head address & temp node (point to dummy node) which will keep moving ahead to new added node.
+2. Initizlize sum as 0
+3. Start looping until both list pointer not reaches to null or carry greater than 0 (l1 != null || l2 != null || carry == 1)
+4. Use 2 if statement and get the sum of both list pointer values if non-null and move to next node
+    a. if (l1 != null) then sum += l1.val; l1 = l1.next;
+    b. if (l2 != null) then sum += l2.val; l2 = l2.next;
+5. Then, add carry into sum variable.
+6. Calculate carry performing div operation on sum.
+7. Create newNode by performing mod operation on sum and enter its address to temp.next as temp.next = newNode;
+8. Move temp pointer to newly added node as temp = temp.next
+9. Outside loop, return dummy.next;
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 6: Delete a given node when node is given:
+
+1. Copy next node value into current node val: node.val = node.next.val;
+2. Copy next to next node address into current node next: node.next = node.next.next;
+
+----------------------------------------------------------------------------------------------------------------------
+**************************************************************************************************************************
+
+Day 6: LinkedList - Part-II
+
+**************************************************************************************************************************
+
+Problem 1: Intersection point of 2 LinkedList
+
+Intuition for optimal approach:
+If we move both the pointers together for 2 iteration (in first iteration if any of node reaches to null then swap the head and restart moving the pointers together), then in case of existing intersection they will collide to common node in second iteration. Otherwise they will move to null at the same point.
+
+Steps: 
+1. Create pointer a & b pointing to headA & headB respectively.
+2. Start looping until a != b and check if any of pointer reaches to null then assign to other list head and keep incrementing again otherwise simply move to next node.
+    i.  a = a == null ? headB : a.next;
+    ii. b = b == null ? headA : b.next;
+    Note: Here, For the end of first iteration, we are just resetting the pointer to the head of another linkedList
+3. Outside loop, return a.
+
+----------------------------------------------------------------------------------------------------------------------

@@ -8,11 +8,11 @@ public class FourSum {
 
     public static List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        int n = nums.length;
-        Arrays.sort(nums);
-        if (nums.length == 0 || nums == null) {
+        if (nums == null || nums.length == 0) {
             return res;
         }
+        int n = nums.length;
+        Arrays.sort(nums);
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {

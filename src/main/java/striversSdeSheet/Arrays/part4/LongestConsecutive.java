@@ -16,7 +16,7 @@ public class LongestConsecutive {
         for (int n : nums) {
             //Here, we are trying to find the  minimal value of the sequence so that we can start checking
             //from their upto complete sequence available.
-            //If not available then do nothing and move to next iteration.
+            //If n - 1 available then do nothing and move to next iteration to get the lowest value of that sequence.
             if (!hashSet.contains(n - 1)) {
                 currentNum = n;
                 currentStreak = 1;

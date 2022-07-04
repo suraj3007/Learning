@@ -9,6 +9,7 @@ public class FindIntersectionOfLinkedList {
         ListNode a = headA;
         ListNode b = headB;
         while (a != b) {
+            //For the end of first iteration, we just reset the pointer to the head of another linkedList
             a = a == null ? headB : a.next;
             b = b == null ? headA : b.next;
         }
