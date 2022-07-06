@@ -38,7 +38,7 @@ outside for loop j:
 
 Problem 3: - Next Permutation:
 
-Intuition with steps: -
+Intution with steps: -
 - From back there is an increasing sequence even for 1 element or more than 1 element. So, humko break point dhundhna hai from the back where a[i] < a[i + 1].
 Step 1: - Get index i from back where a[i] < a[i + 1] -> Code me ulta condition lagaenge
 
@@ -66,7 +66,7 @@ Problem 4: - Kadane's algorithm (Maximum subarray):
 
 Problem 5: - Sort an array of 0's, 1's & 2's (Dutch National flag algorithm is used to sort this in O(N) TC.):
 
-Intuition: -
+Intution: -
 - [0 ... low -1] -> 0 (Left side of low pointer will contains 0's)
 - [high + 1 ... n] -> 2 (Right side of high pointer will contains 2's)
 
@@ -129,13 +129,13 @@ Problem 4: - Find Duplicate number
 4. Once collided, mark fast pointer as nums[0] to zeroth index value.
 5. Now start moving both the pointer by 1 place (slow = nums[slow]; fast = nums[fast]) and place where they will collide will be a duplicate number.
 
-Intuition: 
+Intuition:
 1. For first collision:- Since it is mentioned that duplicate is available, hence cycle is bound to be created and both pointer will collide.
 2. For second collision on duplicate number: - For first collision, number of rounds fast pointer will take will be multiple of actual distance from starting point. So, when we move fast pointer at the start and begin moving both pointer by 1 then both will travel same distance.
 
 --------------------------------------------------------------------------------------------------------------------------
 
-Problem 5: - Find missing & repeating number: 
+Problem 5: - Find missing & repeating number:
 
 Naive approach is creating array of size n+1 and keep marking value as visited which we find in an array. At the end, repeated number count will be more than 1 & missing number count will be 0.
 
@@ -189,7 +189,7 @@ Intuition: -
 
 --------------------------------------------------------------------------------------------------------------------------
 
-Problem 2: - Pow(X, N): 
+Problem 2: - Pow(X, N):
 
 **
  * Logic explanation: -
@@ -216,7 +216,7 @@ Problem 2: - Pow(X, N):
 
  -------------------------------------------------------------------------------------------------------------------------
 
- Problem 3: - Majority Element: 
+ Problem 3: - Majority Element:
  Condition: -
  The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
 
@@ -245,7 +245,7 @@ Other way: -
 
 -------------------------------------------------------------------------------------------------------------------------
 
-Problem 4: - Majority Element - II: 
+Problem 4: - Majority Element - II:
 
 /**
  * This time we have to find all element which occurs more than n/3 times.
@@ -383,13 +383,13 @@ Problem 4: - Largest subarray with zero sum
 
 ----------------------------------------------------------------------------------------------------------------------
 
-Problem 5: - Count number of subarrays with given Xor K: 
+Problem 5: - Count number of subarrays with given Xor K:
 
 Intuition: -
 If prefix XOR is XR and we have some patches which gives XOR as K and remaining XOR as Y then we can say thay Y ^ K = XR.
 This can be reduced as as Y = XR ^ K. Here, we have to find the frequency of such Y's that will ultimately leads to count of such subarrays which will give XOR as K.
 
-Steps (B is target XOR): 
+Steps (B is target XOR):
 1. Initialize map & count = 0, xor = 0.
 2. Iterate over each element j and find prefix xor = xor ^ j    //Equation expianed above
 3. Check if (xor == B) then increment count by 1.
@@ -400,7 +400,7 @@ Steps (B is target XOR):
 
 ----------------------------------------------------------------------------------------------------------------------
 
-Problem 6: - Longest substring without repeat:  
+Problem 6: - Longest substring without repeat:
 
 Intution/Steps:
 
@@ -418,7 +418,7 @@ Intution/Steps:
  */
 
 1. Initialize map & left = 0, right = 0, maxLength = 0;
-2. Start looping till (right < s.length()) check if character is available in map using using condition (map.containsKey(s.charAt(right))). If available then assign left as left = Math.max(map.get(s.charAt(right)) + 1, left);
+2. Start looping till (right < s.length()) check if character is available in map using condition (map.containsKey(s.charAt(right))). If available then assign left as left = Math.max(map.get(s.charAt(right)) + 1, left);
     This will also handle if character index is available within evaluating range.
 3. Outside if statement but within while loop assign maxLength as Math.max(maxLength, right - left + 1);
     //This is used to evaluate maximum length.
@@ -450,7 +450,7 @@ Problem 2: Find middle of LinkedList:
 
 1. Initialize fast and slow pointer as ListNode fast = head, slow = head;
 2. Start looping until fast != null && fast.next != null
-3. Move slow and fast pointer as 
+3. Move slow and fast pointer as
     a. slow = slow.next;
     b. fast = fast.next.next;
 4. return slow;
@@ -466,7 +466,7 @@ Problem 3: : Merge two sorted Linked List:
 5. Till list1 has lesser value than list2, assign current node to temp1 & keep incrementing list1 to next value.
     Again start while loop till list1 != null && list1.val <= list2.val
     Assign temp as list1 & list1 as list1.next;
-6. Outside inner while loop(will break if l2.val > current l1.val OR list 1 as null. It means next value will be l2.val, hence assigning to temp.next), assign temp.next to list2.  
+6. Outside inner while loop(will break if l2.val > current l1.val OR list 1 as null. It means next value will be l2.val, hence assigning to temp.next), assign temp.next to list2.
 7. Swap: to ensure next smaller value of list will marked as list1
 8. Return res
 
@@ -516,15 +516,121 @@ Day 6: LinkedList - Part-II
 
 Problem 1: Intersection point of 2 LinkedList
 
-Intuition for optimal approach:
+Intution for optimal approach:
 If we move both the pointers together for 2 iteration (in first iteration if any of node reaches to null then swap the head and restart moving the pointers together), then in case of existing intersection they will collide to common node in second iteration. Otherwise they will move to null at the same point.
 
-Steps: 
+Steps:
 1. Create pointer a & b pointing to headA & headB respectively.
-2. Start looping until a != b and check if any of pointer reaches to null then assign to other list head and keep incrementing again otherwise simply move to next node.
+2. Start looping until a != b and check if any of pointer reachs to null then assign to other list head and keep incrementing again otherwise simply move to next node.
     i.  a = a == null ? headB : a.next;
     ii. b = b == null ? headA : b.next;
     Note: Here, For the end of first iteration, we are just resetting the pointer to the head of another linkedList
 3. Outside loop, return a.
 
 ----------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - Detect a cycle in LinkedList:
+
+Use low and fast pointer. If there will be loop then they will collide at one point otherwise fast pointer will reach to null
+
+1. Declare slow & fast pointer pointing to head.
+2. Start looping till (fast != null && fast.next != null)
+3. Move slow by 1 & fast by 2 pointers.
+4. Check if (fast == slow) then return true. Otherwise continue with next iteration.
+5. Outside loop, return false. Because if loop exist it will be handled and return true within loop itself.
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 3: - Reverse a LinkedList in groups of size k:
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - Check if a LinkedList is palindrome or not:
+
+1. Check negative scenario: if (head.next == null || head == null) return true;
+2. Declare slow & fast pointer pointing to head.
+3. We will try to find middle of linkedList. Hence, start looping till (fast.next != null && fast.next.next != null) and move slow by 1 & fast by 2 pointers.
+4. Now reverse the list and store the head of reversed list to slow pointer. (for logic refer, Day 5 problem 1 above) Basically reverse the right half.
+5. Move slow to next pointer which will be head of reversed list. In hindsight, move slow to right half.
+6. Start looping till (slow != null). Checking for left & right half value.
+7. Check if head.val != slow.val then return false.
+8. Move head and slow to next pointer.
+9. Outside loop return true. Because is it will not be palindrome then will return false from step 7 only.
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Find the starting point of the Loop of LinkedList:
+
+Intuition: Similar to Find duplicate problem (Day 2 Problem 4)
+
+1. Create fast and slow pointer pointing to head.
+2. Start looping till (fast != null && fast.next != null) and increment slow by 1 & fast by 2 pointers.
+3. Check if (slow == fast) if yes then
+    a. Move fast pointer back to head.
+    b. Start looping till fast != slow and move both pointers by 1. Both pointers will come at same position where loop will begin.
+    c. return fast.
+4. Keep going with next iteration of step 2.
+5. Outside loop, return null. If linkedlist contains loop then it will be returned by 3.c
+
+----------------------------------------------------------------------------------------------------------------------
+
+Problem 6: Flattening of a LinkedList:
+
+
+----------------------------------------------------------------------------------------------------------------------
+**************************************************************************************************************************
+
+Day 7: LinkedList & Arrays:
+
+**************************************************************************************************************************
+
+Problem 1: Rotate a LinkedList
+
+Intuition: - Pointing last node to first node as after rotating last node will point to first
+
+1. Declare a node curr pointing to head & compute length of a LinkedList. In the same process reach to last node.
+2. After that implement the intuiton using curr.next = head;
+3. Compute k by performin mod operation to handle edge cases where k > n : k = k % length
+    Note: - k's multiple will have original list after rotations. If length is 5, so after 5, 10, 15th... rotation, it will be similar to original list.
+4. Traverse till that node ie. if len is 5 and rotation needed is 2, so we traverse till 3rd node.
+    a. k = length - k
+    b. while (k-- > 0) curr = curr.next;
+5. Make the node head and break the connection.
+    a. head = curr.next;
+    b. curr.next =null;
+6. return head
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 2: Clone a Linked List with random and next pointer
+
+Declare iter(keep iterating to next node & point to head again before starting step 2 & 3) & front (use it for storing next node address) pointing to head.
+1. Make copy of each node and link them together side-by-side in a single list.
+2. Assign random pointers for the copy nodes : **iter.next.random = iter.random.next**;
+3. Restore the original list, and extract the copy list.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 3: 3 Sum
+Condition: i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Intuition: - a + b + c = 0. Hence, a = - (b + c). So, we will keep 'a' constant and try to find out b + c
+
+1. Check for -ve scenario: if length < 3 return empty list.
+2. Sort an array to get duplicates together & initialize List<List<Integer>> res
+3. Start loop i (o -> < length - 2)
+4. Major if condition: (i == 0 || (i > 0 && nums[i] != nums[i - 1])) // to avoid duplicates for a
+    a. Declare low = 0 & high = length - 1 & **sum = -nums[i]**
+    b. Start looping till low < high
+    c. if (nums[low] + nums[high] == sum) then add it into res as Arrays.List in sequence of i, low & high to get unique triplets.
+        i. Within same while loop, start loop again to skip duplicate number for low:
+        while (low < high && nums[low] == nums[low + 1]) low++;
+        ii. Within same while loop, start loop again to skip duplicate number for high:
+        while (low < high && nums[high] == nums[high - 1]) high--;
+        iii. Then increment both low & high by 1.
+    d. ELSE if (nums[low] + nums[high] < sum) low++;
+    e. ELSE high--
+5. return res.
+
+--------------------------------------------------------------------------------------------------------------------------
