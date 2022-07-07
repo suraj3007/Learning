@@ -634,3 +634,124 @@ Intuition: - a + b + c = 0. Hence, a = - (b + c). So, we will keep 'a' constant 
 5. return res.
 
 --------------------------------------------------------------------------------------------------------------------------
+
+Problem 4: Trapping rainwater:
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 5: Remove Duplicate from Sorted array:
+Condition: -
+Input: nums = [0,0,1,1,1,2,2,3,3,4]
+Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+
+1. Check -ve scenario. If length == 0 the return 0.
+2. Declare i = 0. (It will ensure the index at which unique element will be present)
+3. Start loop j (1 to < len).
+4. Check if (nums[i] != nums[j]) then **nums[++i] = nums[j];**
+5. Outside for loop, return i + 1; (i is index here, we have to return number of elements after removing duplicates)
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 6: Max consecutive ones
+
+1. Check -ve scenario. If length == 0 the return 0.
+2. Declare maxi and count as 0.
+3. Start loop i (o -> n)
+4. Check if (nums[i] == 1) then count++; ELSE
+5. assign maxi as Math.max(count, maxi); Also set count to 0;
+6. Outside for loop, return Math.max(count, maxi);
+
+--------------------------------------------------------------------------------------------------------------------------
+**************************************************************************************************************************
+
+Day 8: Greedy Algorithm:
+
+**************************************************************************************************************************
+
+Problem 1: N meetings in one room
+
+1. Try to convert given input in the form of object. So, create Meeting class, create an object with index as pos & add it into the list.
+2. Sort the objects based on end time so that meeting with minimum finishing time will be at top. **If end time is equal then sort based on pos.**
+3. After sorting, since mininum finishing time is at top, declare count as 1 & endLimit as meetings.get(0).end;
+4. Start loop i (1 -> < n) and check if (meetings.get(i).start > endLimit).
+5. If yes, then count++; assign new endLimit as meetings.get(i).end.
+6. Outside for loop, return count.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 2. Minimum number of platforms required for a railway
+
+Intuition: -
+1. Sorting both will change the indexes of train timings but at the end arrival & departure time matters.
+2. If train is arriving, it will occupy the platform & while leaving, it will leave the platform vacant.
+3. So, we are just gonna play with train timings of an entire day.
+
+Steps: -
+1. Sort both the arrays.
+2. Initialize *i = 1*(pointing to arrival array) & j = 0 (pointing to departure array). Also, plat_needed = 1, result = 1;
+3. Start looping till (i < n && j < n) and check for 3 conditions
+4. check if arrival time is lesser than departure time then additional platform would be needed. Also increment i.
+    if (arr[i] <= dep[j]) then plat_needed++; Also, i++;
+5. check if arrival time is greater than departure time then additional platform won't be needed. Also increment j.
+    else if (arr[i] > dep[j]) then plat_needed--; Also, j++;
+6. Check for maximum no. of platform value.
+    if (plat_needed > result) then result = plat_needed
+7. Outside loop, return result;
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 3: Job sequencing problem:
+
+Intution:
+We are going to sort the objects in descending order of their profit. Then, will perform each job on last day of their respective jobs. If that slot is occupied then move towards zero to find any empty slots. If found then perform job otherwise move ahead with next iteration.
+
+Steps:
+
+1. Sort an objects in descending order of their profit : Arrays.sort(arr, (a, b) -> b.profit - a.profit);
+2. Start looping & find maximum deadline from the objects using maxi variable.
+3. Outside loop initialize an array result of max_deadline(from step 2) + 1.
+4. Start looping i (*1* to <= max_deadline) and initalize all indexes with -1.
+5. Outside loop, initialize count & maxProfit as 0.
+6. Now, 2 for loops : 1st to iterate over all job ids & 2nd to iterate from given deadline towards 0 to find the empty slot.
+7. Start loop i (0 to < n) & j (arr[i].deadline to > 0)
+8. Check if (result[j] == -1) then      //Slot found
+    a. result[j] = i;
+    b. count++;
+    c. maxProfit += arr[i].profit;
+9. Outside both loops, return new int[]{count, maxProfit};
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 4: Fractional Knapsack Problem
+
+Intuition:
+Sort the object in decreasing order of value/weight. Also, take care of datatype. Convert it to double while performing div operation.
+
+Steps: -
+1. Sort the array in decreasing order of value/weight.
+2. Declare currentWeight as 0 & result = 0.0
+3. Start loop i and perform if else operation
+    a. Check if (currentWeight + arr[i].weight <= W) then assign currentWeight += arr[i].weight & result += arr[i].value;
+    b. ELSE calculate the remanining as W - currentWeight.
+        Multiply it with value/weight calculation: result += ((double) arr[i].value / (double) arr[i].weight) * (double) remain;
+        ***break;***    //Because this will fill the capacity so no need to iterate over further elements.
+4. return result;
+
+--------------------------------------------------------------------------------------------------------------------------
+
+Problem 5: Find minimum number of coins:
+Conditions: we have denominations in abundance. Means any coin can be used any number of times.
+
+Intuition: Find minimum/equal denotions that is closer to V.
+
+Steps:
+1. Declare Indian denominations & minimumCoins as 0
+2. Start looping i (length - 1 till >=0 && V > 0)
+3. Loop again till (V >= deno[i]) // When V values go lesser than current denomination, then move to lesser denomination
+    a. V -= deno[i];
+    b. minimumCoins++;
+return minimumCoins;
+
+--------------------------------------------------------------------------------------------------------------------------
