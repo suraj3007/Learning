@@ -1,4 +1,4 @@
-package main.java.dataStructures.Recursion;
+package main.java.striversSdeSheet.Recursion.part1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,33 +32,5 @@ public class SubsetSum {
         List<Integer> arr = Arrays.asList(3, 1, 2);
         ArrayList<Integer> ans = subsetSums(arr);
         System.out.println(ans);
-
-        System.out.println("***** Subset Sum 2 *****");
-
-        int[] arr2 = new int[]{2, 1, 2, 3, 2, 3};
-        List<List<Integer>> ans2 = subsetSums2(arr2);
-        System.out.println(ans2);
-    }
-
-    //find all the combination of sum from given array in increasing order. Array can contain duplicates.
-    //So, duplicates of combination is not allowed.
-    private static List<List<Integer>> subsetSums2(int[] arr) {
-        List<List<Integer>> ans = new ArrayList<>();
-        Arrays.sort(arr);   //To get the duplicates side by side
-        findSubsetSum2(0, arr, ans, new ArrayList<>());
-        return ans;
-    }
-
-    private static void findSubsetSum2(int index, int[] arr, List<List<Integer>> ans, List<Integer> ds){
-        ans.add(new ArrayList<>(ds));
-        for (int i = index; i < arr.length; i++) {
-            if (i != index && arr[i] == arr[i - 1]) {
-                continue;
-            }
-            ds.add(arr[i]);
-            //For every recursion call, list size will increase by 1.
-            findSubsetSum2(i + 1, arr, ans, ds);
-            ds.remove(ds.size() - 1);
-        }
     }
 }

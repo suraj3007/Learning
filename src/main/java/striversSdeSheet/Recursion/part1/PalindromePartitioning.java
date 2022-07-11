@@ -1,4 +1,4 @@
-package main.java.dataStructures.Recursion;
+package main.java.striversSdeSheet.Recursion.part1;
 
 import java.util.ArrayList;
 import java.util.List;
