@@ -781,7 +781,7 @@ Intuition: -
 
 Steps: -
 
-1. Create an List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0. Also, sort the array.
+1. Create a List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0. Also, sort the array.
 2. Add list to the ans. (every recursive call will have subset that needs to be stored. Also, empty list during first call)
 3. Loop i will run from **index -> length**
     a. check for duplicates: - if (i != index && arr[i] == arr[i - 1]) then continue; (no need to add. Move to next iteration)
@@ -793,7 +793,7 @@ Steps: -
 
 Problem 3: Combination sum - I
 
-1. Create an List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0.
+1. Create a List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0.
 2. Base condition: - 2 if conditions if (index == arr.length) ->  if (target == 0) then add to the ans list -> then return
 3. Apply pick & non-pick technique: -
     a. pick after checking if (target >= arr[index])
@@ -806,7 +806,7 @@ Problem 3: Combination sum - I
 
 Problem 4: Combination sum - II
 
-1. Create an List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0. Also, sort the array.
+1. Create a List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0. Also, sort the array.
 2. Base condition: - if (target == 0) then add to the ans list, then return
 3. Loop i will run from **index -> length**
     a. check for duplicates: - if (i != index && arr[i] == arr[i - 1]) then continue; (no need to add. Move to next iteration)
@@ -819,7 +819,7 @@ Problem 4: Combination sum - II
 
 Problem 5: Palindrome Partitioning
 
-1. Create an List<List<String>> ans for storing the result & pass as a reference. Also, pass List<String> ds for each subset along with index = 0.
+1. Create a List<List<String>> ans for storing the result & pass as a reference. Also, pass List<String> ds for each subset along with index = 0.
 2. Base condition: - if (index == s.length()) then add to the ans list, then return
 3. Loop i will run from **index -> length**
     a. check if string is palindrome: if (checkPalindrome(s, index, i))
@@ -843,3 +843,99 @@ Intuition: - div operation will give the number in kth sequence, mod operation w
 4. return ans;
 
 -------------------------------------------------------------------------------------------------------------------
+**************************************************************************************************************************
+
+Day 10: Recursion & Backtracking:
+
+**************************************************************************************************************************
+
+Problem 1: - Print all permutations of a string/array
+
+Intuition: Try out each number at each position by swap from current index to i.
+
+Steps: -
+
+1. Create a List<List<Integer>> ans for storing the result & pass it as a reference.
+2. Base condition: - if (index == nums.length) then create list and add all elements in it. Add this list into ans and return.
+3. Loop from current index to n - 1.
+    a. Swap the number from current index to i: swap(nums, index, i);
+    b. Call function recursively by index + 1: findPermute(index + 1, nums, ans);
+    c. Swap the number from current index to i: swap(nums, index, i);   //After completing the recursion, restore the array values.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 2: - N queens Problem
+
+Intuition: -
+1. We will hold 1 column at a time and traverse for each row if we can place a queen or not. So, we will call function recursively for every column. Within each recursive call, traverse for each row (0 to n).
+2. As we know Queen can attack in 8 directions. But here we will be moving from left to right so, it will cancel out 4 rightward directions attcack + 1 column level attack (since we will place only 1 Queen in 1 column as per conditions).
+3. We have to take care for 3 types of attack since 5 are cancelled out: -
+    a. Check for left diagonal: - row
+    b. Check for lower diagonal: - row + column
+    c. Check for upper diagonal: - (n - 1) + (column - row)
+
+Steps: -
+
+1. Create a chess board of n * n matrix and initialize each coordinates by '.'
+2. Create 3 arrays for hashing/indexing which will take care of whether queen is safe to be placed or not
+    a. int[] leftRow = new int[n];
+    b. int[] lowerDiagonal = new int[2 * n - 1];
+    c. int[] upperDiagonal = new int[2 * n - 1];
+3. Create List<List<String>> res to store result and pass it as a reference. Call recursive function with col 0.
+4. Base condition: - if (col == board.length) then construct the answer. (Look at the code)
+5. Traverse row wise from 0 to n and check for condition if (leftRow[row] == 0 && lowerDiagonal[row + col] == 0 &&
+    upperDiagonal[(board.length - 1) + (col - row)] == 0)   //Whether queen is safe or not
+    a. Based on this, place the queen and mark indexes as 1.
+    b. Go for next col as col + 1.
+    c. after coming back from recursion, unplace the queen and mark the indexes as 0.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 3: - Sudoku Solver:
+
+Intuition: -
+1. Traverse for each row,column to find out empty place.
+2. Then try out char 1 to 9 which can be filled for this empty space.
+    a. Check by keeping row constant and moving i
+    b. Check by moving i and keepung column constant
+    c. Check for 3 * 3 matrix using formula: if **(board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)**
+3. After filling that vacant space, call function recursively to check if all the empty spaces within that rcursion tree get filled or not. If yes then return true ELSE after that recursion remove that char from that place to make it vacant.
+4. If none of the char from 1 t0 9 can be filled then too return false.
+5. Outside all for loop code will come when it will check all the places and now none of the position is empty. It means sudoku is solved. So return true.
+
+(Look code for reference)
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 4: - M coloring Problem:
+
+Intuition: -
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+Problem 5: - Rat in a Maze
+
+Intuition: - We will move into DLRU directions as this lexicographical to get ans in sorted form. Also use di & dj for avoiding 4 direction traversal using if statement. Also, we cannot visit one node twice so using indexing to keep a trace of visited paths. Also, checks for next movement if its equal to 1. Because if its 0, we cannot move to next co-ordinate.
+
+
+1. Create vis array of same m * n matrix size.
+2. Initialize di & dj as (This is created to avoid 4 if statement for 4 different directions. It indicates how much increment needed for i & j to move as DLRU):
+    int[] di = {1, 0, 0, -1};
+    int[] dj = {0, -1, 1, 0};
+3. Call the function if (m[0][0] == 1)
+4. Base conditition: - if (i == n - 1 && j == n - 1) then add into res list and return.
+5. Define String dir = "DLRU"; and start loop index from 0 to 4 which will iterate for 4 directions defined.
+6. Calculate nexti & nextj as
+    int nexti = i + di[ind];
+    int nextj = j + dj[ind];
+7. check for boundary conditions && visited && next value as 1 then:
+    a. Mark current coordinate as visited
+    b. Call recursive function with string added from dir at **index**
+    c. Mark current coordinate as unvisited after coming from recursion.
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+

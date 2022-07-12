@@ -1,4 +1,4 @@
-package main.java.dataStructures.Recursion;
+package main.java.striversSdeSheet.Recursion.part2;
 
 public class SudokuSolver {
 
@@ -11,6 +11,8 @@ public class SudokuSolver {
                 return false;
             }
             if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c){
+                //3 * (row / 3) & 3 * (col / 3) -> will give 3 * 3 matrix block.
+                //i / 3 & i % 3 will give row & column of those 3 * 3 matrix block.
                 return false;
             }
         }
