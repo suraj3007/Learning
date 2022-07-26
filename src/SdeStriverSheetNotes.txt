@@ -1,14 +1,14 @@
-***************************************************************************************************************************
+*******************************************************************************************************
 Day 1: Arrays
-***************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Set Matrix Zeroes :
 
 - Use row zero and column zero for indexing. Use boolean flag for handling zeroes in zeroth column (Because it is responsible for row change as well).
 
-row for loop i(This will set indexing as per each matrix value): 
+row for loop i(This will set indexing as per each matrix value):
 - Check for each row zeroth column (matrix[i][0] == 0), if it contains zero then set the boolean flag.
-column for loop j: 
+column for loop j:
 - Iterate through each matrix co-ordinate with column looping start with 1, if matrix[i][j] == 0 then set corresponding row zero and column zero as 0, otherwise move ahead.
 
 Indexes are set. Now, Start setting zeroes: -
@@ -18,7 +18,7 @@ Two backward for loop i(row - 1 till 0) & j(column - 1 till 1):
 - Iterate through each matrix co-ordinate, check if corresponding row zero and column zero is 0 (matrix[i][0] == 0 || matrix[0][j] == 0) then set that coordinate as zero (matrix[i][j] = 0) otherwise move backward until column 1.
 - Outside column for loop j, check for flag if its set as true then change the column zero of that row as 0 (matrix[i][0] = 0;), otherwise move to next iteration.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Pascals triangle : (return List<List<Integer>>)
 
@@ -34,7 +34,7 @@ outside for loop j:
 - assign row to prev.
 - Add row to res list.
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: - Next Permutation:
 
@@ -51,7 +51,7 @@ Step 3: - Swap index i and j
 - Reverse krenge i+1 se end tak in increasing order which will again ensure lower rank of sorted  order
 Step 4: - Reverse string from i + 1 to length - 1
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - Kadane's algorithm (Maximum subarray):
 
@@ -62,7 +62,7 @@ Problem 4: - Kadane's algorithm (Maximum subarray):
 	b. check if sum < 0 then sum = 0; //Reason: Adding on consecutive -ve values will lower down the sum value so no point having sum as -ve number hence re-assign it to 0.
 4. Return maxSum;
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Sort an array of 0's, 1's & 2's (Dutch National flag algorithm is used to sort this in O(N) TC.):
 
@@ -77,7 +77,7 @@ while(mid <= high) then switch (nums[mid]){}
 3. If mid finds value as 1 -> Just increment mid pointer
 4. If mid finds value as 2 -> Swap high with mid & decrement high pointer
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: - Buy and sell stock:
 
@@ -86,13 +86,13 @@ Problem 6: - Buy and sell stock:
 3. Check if (prices[i] - min > maxProfit) then assign maxProfit as prices[i] - min within same for loop.
 4. Return maxProfit.
 
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
-***************************************************************************************************************************
+*******************************************************************************************************
 
 Day 2: Arrays Part - II
 
-***************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Rotate Matrix:
 
@@ -106,7 +106,7 @@ Problem 1: - Rotate Matrix:
 	a. for loop i(0 -> matrix.length) and for loop j (0 -> matrix.length/2)
 	b. Swap values by using temp and matrix[i][j] = matrix[i][matrix.length - 1 - j];
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Merge overlapping subIntervals (returnType = int[][]):
 
@@ -119,7 +119,7 @@ Problem 2: - Merge overlapping subIntervals (returnType = int[][]):
 7. Outside for loop, again add the pair(last pair during iteration).
 8. return res.toArray(new int[0][]);
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - Find Duplicate number
 
@@ -133,7 +133,7 @@ Intuition:
 1. For first collision:- Since it is mentioned that duplicate is available, hence cycle is bound to be created and both pointer will collide.
 2. For second collision on duplicate number: - For first collision, number of rounds fast pointer will take will be multiple of actual distance from starting point. So, when we move fast pointer at the start and begin moving both pointer by 1 then both will travel same distance.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Find missing & repeating number:
 
@@ -149,13 +149,13 @@ Optimized approach: -
 Intuition: -
 It will form mathematical equation as X - Y = S' and (X + Y) = P'/s' where X is missing number & Y is repeating number.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Day 3: Arrays Part - III
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1 (Leetcode): - Search in a 2D matrix for given condition: -
 - Integers in each row are sorted from left to right.
@@ -187,7 +187,7 @@ Intuition: -
 - If target is equal to coordinate value then return true.
 - If target is greater than coordinate value then go down row wise ELSE move left (decrementing the column) -> As per intuition 1.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Pow(X, N):
 
@@ -214,7 +214,7 @@ Problem 2: - Pow(X, N):
  6. Outside loop check if n < 0 then ans = 1.0 / ans;
  7. Return ans
 
- -------------------------------------------------------------------------------------------------------------------------
+ ------------------------------------------------------------------------------------------------------
 
  Problem 3: - Majority Element:
  Condition: -
@@ -243,7 +243,7 @@ Other way: -
 2. First if statement: if map contains key then insert key by incrementing value by 1 ELSE insert key with value as 1
 3. Second if statement: if map.get(i) > n/2 then ans = i; //Because as per intuition their will be only 1 element which is greater than n/2 times
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - Majority Element - II:
 
@@ -260,7 +260,7 @@ Problem 4: - Majority Element - II:
  4. After getting 2 numbers occurred more times in input, start looping again & try finding respective counts using if else loop.
  5. Outside for loop, check if count1/count2 is greater than n/3 times using 2 if statements. If yes then add to the list and return.
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Grid unique paths (Google interview question)
 
@@ -300,26 +300,26 @@ Intuition:
 3. Loop (1 to <= R), and apply formula: res = res * (N - R + i) / i;
 4. return (int) res;
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: - Reverse Pairs. (Not implemented yet)
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Day 4: Arrays Part - IV
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Two Sum:
 
 1. Initialize Map<Integer, Integer> and diff = 0.
-2. Start looping over each element (o -> nums.length) and find diff as target - nums[i];
+2. Start looping over each element (0 -> nums.length) and find diff as target - nums[i];
 3. check if (map.containsKey(diff)) then return new int[]{map.get(diff), i}; ELSE map.put(nums[i], i);
 4. Outside loop return new int[]{-1, -1};
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Four Sum:
 
@@ -339,7 +339,7 @@ Problem 2: - Four Sum:
     a. while (i + 1 < n && nums[i] == nums[i + 1]) ++i;
     Here, i will still be pointing to duplicate number, but ++i in for loop will move pointer to next non-duplicate number.
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: - Longest Consecutive sequence:
 
@@ -354,7 +354,7 @@ Here, we are trying to find the  minimal value of the sequence so that we can st
 6. Outside if loop & within for loop, assign longestStreak = Math.max(longestStreak, currentStreak);
 7. return longestStreak;
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - Largest subarray with zero sum
 
@@ -378,10 +378,10 @@ Problem 4: - Largest subarray with zero sum
     a. if sum == 0 then maxi = i + 1; ELSE
     b. else if map.containsKey(sum) then maxi = Math.max(maxi, i - map.get(sum)); ELSE
     c. else map.put(sum, i); //Storing sum & index
-4. Outside loop, return maxi;
+ 4. Outside loop, return maxi;
 
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Count number of subarrays with given Xor K:
 
@@ -398,7 +398,7 @@ Steps (B is target XOR):
 6. map.put(xor, 1);
 7. Outside loop, return count.
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: - Longest substring without repeat:
 
@@ -424,13 +424,13 @@ Intution/Steps:
     //This is used to evaluate maximum length.
 4. Keep adding character in map and incrementing right pointer using map.put(s.charAt(right), right++);
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Day 5: LinkedList
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Reverse a Linked List
 
@@ -444,7 +444,7 @@ Steps: -
     d. Move head node to next node: head = next;
 4. return newHead;
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: Find middle of LinkedList:
 
@@ -455,7 +455,7 @@ Problem 2: Find middle of LinkedList:
     b. fast = fast.next.next;
 4. return slow;
 
----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: : Merge two sorted Linked List:
 
@@ -470,7 +470,7 @@ Problem 3: : Merge two sorted Linked List:
 7. Swap: to ensure next smaller value of list will marked as list1
 8. Return res
 
----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: : Remove nth node from the end of LinkedList
 
@@ -483,7 +483,7 @@ Use fast slow pointer to solve this problem. Here slow pointer will be one node 
 5. By the time fast will move to null, slow pointer will be at point where next nodes need to be deleted. So, break this link using slow.next = slow.next.next;
 6. return startNode.next;
 
----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: : Add 2 numbers as LinkedList
 
@@ -500,19 +500,19 @@ Problem 5: : Add 2 numbers as LinkedList
 9. Outside loop, return dummy.next;
 
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: Delete a given node when node is given:
 
 1. Copy next node value into current node val: node.val = node.next.val;
 2. Copy next to next node address into current node next: node.next = node.next.next;
 
-----------------------------------------------------------------------------------------------------------------------
-**************************************************************************************************************************
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
 Day 6: LinkedList - Part-II
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: Intersection point of 2 LinkedList
 
@@ -527,7 +527,7 @@ Steps:
     Note: Here, For the end of first iteration, we are just resetting the pointer to the head of another linkedList
 3. Outside loop, return a.
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Detect a cycle in LinkedList:
 
@@ -539,12 +539,12 @@ Use low and fast pointer. If there will be loop then they will collide at one po
 4. Check if (fast == slow) then return true. Otherwise continue with next iteration.
 5. Outside loop, return false. Because if loop exist it will be handled and return true within loop itself.
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: - Reverse a LinkedList in groups of size k:
 
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - Check if a LinkedList is palindrome or not:
 
@@ -558,7 +558,7 @@ Problem 4: - Check if a LinkedList is palindrome or not:
 8. Move head and slow to next pointer.
 9. Outside loop return true. Because is it will not be palindrome then will return false from step 7 only.
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Find the starting point of the Loop of LinkedList:
 
@@ -573,17 +573,17 @@ Intuition: Similar to Find duplicate problem (Day 2 Problem 4)
 4. Keep going with next iteration of step 2.
 5. Outside loop, return null. If linkedlist contains loop then it will be returned by 3.c
 
-----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: Flattening of a LinkedList:
 
 
-----------------------------------------------------------------------------------------------------------------------
-**************************************************************************************************************************
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
 Day 7: LinkedList & Arrays:
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: Rotate a LinkedList
 
@@ -601,7 +601,7 @@ Intuition: - Pointing last node to first node as after rotating last node will p
     b. curr.next =null;
 6. return head
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: Clone a Linked List with random and next pointer
 
@@ -610,7 +610,7 @@ Declare iter(keep iterating to next node & point to head again before starting s
 2. Assign random pointers for the copy nodes : **iter.next.random = iter.random.next**;
 3. Restore the original list, and extract the copy list.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: 3 Sum
 Condition: i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
@@ -633,13 +633,13 @@ Intuition: - a + b + c = 0. Hence, a = - (b + c). So, we will keep 'a' constant 
     e. ELSE high--
 5. return res.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: Trapping rainwater:
 
 
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: Remove Duplicate from Sorted array:
 Condition: -
@@ -652,23 +652,23 @@ Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
 4. Check if (nums[i] != nums[j]) then **nums[++i] = nums[j];**
 5. Outside for loop, return i + 1; (i is index here, we have to return number of elements after removing duplicates)
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: Max consecutive ones
 
 1. Check -ve scenario. If length == 0 the return 0.
 2. Declare maxi and count as 0.
-3. Start loop i (o -> n)
+3. Start loop i (0 -> n)
 4. Check if (nums[i] == 1) then count++; ELSE
 5. assign maxi as Math.max(count, maxi); Also set count to 0;
-6. Outside for loop, return Math.max(count, maxi);
+6. Outside for loop, return **Math.max(count, maxi);**
 
---------------------------------------------------------------------------------------------------------------------------
-**************************************************************************************************************************
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
 Day 8: Greedy Algorithm:
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: N meetings in one room
 
@@ -679,7 +679,7 @@ Problem 1: N meetings in one room
 5. If yes, then count++; assign new endLimit as meetings.get(i).end.
 6. Outside for loop, return count.
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2. Minimum number of platforms required for a railway
 
@@ -700,7 +700,7 @@ Steps: -
     if (plat_needed > result) then result = plat_needed
 7. Outside loop, return result;
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: Job sequencing problem:
 
@@ -722,7 +722,7 @@ Steps:
     c. maxProfit += arr[i].profit;
 9. Outside both loops, return new int[]{count, maxProfit};
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: Fractional Knapsack Problem
 
@@ -739,7 +739,7 @@ Steps: -
         ***break;***    //Because this will fill the capacity so no need to iterate over further elements.
 4. return result;
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: Find minimum number of coins:
 Conditions: we have denominations in abundance. Means any coin can be used any number of times.
@@ -754,12 +754,12 @@ Steps:
     b. minimumCoins++;
 return minimumCoins;
 
---------------------------------------------------------------------------------------------------------------------------
-**************************************************************************************************************************
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
 Day 9: Recursion:
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Subset Sums:
 
@@ -773,11 +773,9 @@ Steps: -
     a. pick : - findSubsetSum(index + 1, sum + arr.get(index), arr, subsetSums);
     b. not pick: - findSubsetSum(index + 1, sum, arr, subsetSums);
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - Subsets - II
-
-Intuition: -
 
 Steps: -
 
@@ -789,7 +787,7 @@ Steps: -
     c. Call recursive function for i + 1 index: findSubsets(i + 1, arr, ans, ds);
     d. Remove last element after coming back from recursion : ds.remove(ds.size() - 1);
 
---------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: Combination sum - I
 
@@ -802,7 +800,7 @@ Problem 3: Combination sum - I
         iii. ds.remove(ds.size() - 1);
     b. not pick: findCombinations(index + 1, arr, target, ans, ds);
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: Combination sum - II
 
@@ -815,7 +813,7 @@ Problem 4: Combination sum - II
     d. Call recursive function for i + 1 index & reducing the target: findCombinations2(i + 1, arr, target - arr[i], ans, ds);
     e. Remove last element after coming back from recursion : ds.remove(ds.size() - 1);
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: Palindrome Partitioning
 
@@ -827,11 +825,11 @@ Problem 5: Palindrome Partitioning
         ii. Call recursive function for i + 1 index : performPartition(i + 1, s, res, ds);
         iii. Remove last element after coming back from recursion : ds.remove(ds.size() - 1);
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 6: K-th permutation Sequence : for n given number, find kth permutation sequence
 
-Intuition: - div operation will give the number in kth sequence, mod operation will give which sequence to look for from remaining set of numbers
+Intuition: - div operation will give the number for each index in kth sequence, mod operation will give which sequence to look for from remaining set of numbers
 
 1. Calculate factorial for n - 1 and simultaneously add number into list.
 2. For 0-based indexing, do k = k - 1 and declare String ans = "" to store the result.
@@ -842,12 +840,12 @@ Intuition: - div operation will give the number in kth sequence, mod operation w
     d. Calculate its factorial which should be fact / number of remaining elements. : fact = fact / numbers.size();
 4. return ans;
 
--------------------------------------------------------------------------------------------------------------------
-**************************************************************************************************************************
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
 Day 10: Recursion & Backtracking:
 
-**************************************************************************************************************************
+*******************************************************************************************************
 
 Problem 1: - Print all permutations of a string/array
 
@@ -862,7 +860,7 @@ Steps: -
     b. Call function recursively by index + 1: findPermute(index + 1, nums, ans);
     c. Swap the number from current index to i: swap(nums, index, i);   //After completing the recursion, restore the array values.
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 2: - N queens Problem
 
@@ -889,7 +887,7 @@ Steps: -
     b. Go for next col as col + 1.
     c. after coming back from recursion, unplace the queen and mark the indexes as 0.
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 3: - Sudoku Solver:
 
@@ -905,7 +903,7 @@ Intuition: -
 
 (Look code for reference)
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 4: - M coloring Problem:
 
@@ -913,7 +911,7 @@ Intuition: -
 
 
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 Problem 5: - Rat in a Maze
 
@@ -935,7 +933,802 @@ Intuition: - We will move into DLRU directions as this lexicographical to get an
     b. Call recursive function with string added from dir at **index**
     c. Mark current coordinate as unvisited after coming from recursion.
 
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
+Day 11: Binary Search:
+
+*******************************************************************************************************
+
+Problem 1: The N-th root of an integer
+
+1. Take low and high. Low will be equal to 1 and high will be M. We will take the mid of low and high such that the searching space is reduced using low + high / 2.0
+2. Run the while loop till (high – low > eps). Take eps as 1e-6, since we have to find answers to 6 decimal places.
+3. If multiplying mid N times is greater than M, then we will reduce high such that high = mid. Else, if it is lesser than M then we will increase low such that low = mid.
+4. After the loop breaks we will have our answer as low or high.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Find the element that appears once in a sorted array, and the rest element appears twice (Binary search)
+
+Intuition: -
+Left half before element appears once: -
+1st occurrence: even index
+2nd occurrence: odd index
+
+Right half after element appears once: -
+1st occurrence: odd index
+2nd occurrence: even index
+
+Goal is to find the breaking point. Once low crosses high, that arr[low] will be the element that appears once.
+During every search, we would have to check if it lies in left half or not. If yes, then move low to mid + 1 to find breaking point and if no then move high to mid - 1 to find the left half.
+
+Steps: -
+
+1. Take low as 0 and high as **nums.length - 2** //To handle scenario where element appears once is at last index.
+    If we will keep high at last index in that case all element before it will be sorted and considered as left half. Hence, high pointer will never move and at last low will reach high but it will never cross high. Therefore, we are keeping it at second last index.
+2. Start while loop till low <= high
+    a. Calcluate mid as (high + low) / 2.
+    b. Check if (nums[mid] == nums[mid ^ 1]) then low = mid + 1;    //If left half then find the break point.
+    c. ELSE high = mid - 1.     //If right half, shrink high pointer to find left half.
+3. return nums[low]
+
+Note: - mid ^ 1 :
+    a. If mid is odd index then it will give previous even index.
+    For eg: for index 3 (mid) -> 1 1 ^ 1 = 1 0 = 2
+    b. If mid is even index then it will give next odd index.
+    For eg: for index 4 (mid) -> 1 0 0 ^ 1 = 1 0 1= 5
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3 : Search in rotated sorted array
+
+Intuition: -
+
+Apply binary search with additional checkpoint if left array is sorted or right array sorted and try to figure out if target is available in that half or not.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4 : Median of 2 sorted array
+
+Intuition: -
+1. To get left1, left2, right1 & right2 for comparison. Because for finding median we need 2 element in case of even length or 1 element in case of odd length.
+
+Now, idea is if we combine both array so, it should be sorted one. If we are dividing it from any index, left half values will be smaller than right half.
+So just ensuring by below condition, if we are cutting the arrays properly or not.
+Hence, doing cross array element check because since array is sorted then comparing left1 with right1 & left2 with right 2 will always be true.
+2. Apply condition: if (left1 <= right2 && left2 <= right1) then
+    a. for even length -> return max(l1, l2) + min(r1, r2) / 2.0
+    b. for odd length -> return max(l1, l2)
+
+3. ELSE If (left1 > right2) then high = cut1 - 1 //if left1 from 1st array is greater than right1 of second array
+    then, Left1 ko kam karna padega toh high ko kam karo.
+
+4. ELSe low = cut1 + 1;
+if left2 from 1st array is greater than right2 of second array then left2 ko chota krna padega, jiske liye left1 ko badhana padega. toh low ko aage lekar jaao.
+left1 ko badhaaenge tab hi left2 me kam values aaenge. Since array is sorted toh kam value, matlab moving towards lower side.
+
+Steps: -
+1. **Check size of both the arrays and make sure nums1 is the lower size array.** Otherwise corner cases fail hoga. Also, it will reduce the binary search space.
+2. Take low as 0 and high as n1 (nums1.length)
+3. Start looping till (low <= high)
+4. Find out cut1 as breaking point for array1 & cut2 as breaking point for array2
+    a. int cut1 = (low + high) / 2;
+    b. int cut2 = ((n1 + n2 + 1) / 2) - cut1;
+5. Handle Edge cases:
+    a. If cut1 is 0 means cut1 - 1 would be outside boundary. It means not picking any element from array. So, assign it as min value for comparison.
+    int left1 = cut1 == 0 ? Integer.MIN_VALUE : nums1[cut1 - 1];
+    int left2 = cut2 == 0 ? Integer.MIN_VALUE : nums2[cut2 - 1];
+
+    b. If cut2 is n means cut1 would be outside boundary. It means not picking any element from array. So, assign it as max value for comparison.
+    int right1 = cut1 == n1 ? Integer.MAX_VALUE : nums1[cut1];
+    int right2 = cut2 == n2 ? Integer.MAX_VALUE : nums2[cut2];
+6. Check for condition explained in intuition above.
+7. Outside loop, return 0.0;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: K-th element of two sorted arrays
+
+Inutition:
+1. It is exactly similar 2 previous problems. Except, in previous problem we were trying to have exactly half element on left hand side after proper cut. Here, we are trying to have k element on left hand side after proper cut.
+int cut1 = (low + high) / 2;
+int cut2 = k - cut1;
+
+2. Since we are making sure to have k element on left half, we can return maximum of l1,l2
+return Math.max(left1, left2);
+
+3. Very important thing to make sure we assign valid low & high pointer based on k value. To handle edge cases like if k < arr1.size or k > arr2.size because from above condition we ensure that arr1 will be lesser size & arr2. is of greater size.
+Consider eg after swapping: arr1 = {1, 4, 6, 8} & arr2 = {2, 3, 5, 7, 9}
+    a. Condition 1 : k = 3 which is < arr1.length
+    Here, we cannot have low as 0 and high as 4 because k = 3, So we cannot pick 4 values from arr1 after partitioning. Hence, high will be 3 here which is k.
+    So, it means high can be *min*(k, arr1.length)
+
+    b. Condition 2 : k = 6 which is > arr2.length
+    Here, we cannot have low as 0 because if low is zero then for 1 of the scenario it will partition where it wont pick any value from arr1 & all values from arr2 (which is not possible because arr2 ka size is 5 and we want 6 elements.. right??). Iska matlab atleast 1 element to pick karna hi padega arr1 se. So, low cannot be 0.
+    So, low needs to be start with 1 which is k - arr2.length. Therefore, low = *Math.max*(0,k - m)
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: Allocate Minimum Number of Pages
+
+Intuition: -
+1. Apply binary search keeping low as first number of an array & high as sum of all elements of an array.
+2. Calculate mid and consider it as a barrier to find out how many pages can be allocated to each student within that barrier.
+3. If its a valid barrier means within barrier all condition would met and pages allocated to each student provided then keep decrementing the high pointer to find the minimal one.
+4. If its not a valid barrier then increment low to mid + 1.
+
+Steps: -
+
+1. Check for negative scenario, if array length is less than no. of students return -1. Because condition is : Each student has to be allocated at least one book.
+2. Define low as first number of an array & high as sum of all array elements.
+3. Start looping while (low <= high)
+    a. calculate mid.
+    b. Check if isValidAllocation then store the mid into res and high = mid - 1.
+    c. ELSE low = mid + 1;
+4. isValidAllocation function: -
+    a. Initialize noOfStudents = 0 & pagesAllocated = 0;
+    b. start looping i 0 to n
+    c. if (pagesAllocated + A[i] > barrier) then increment noOfStudents by 1 & pagesAllocated = A[i].
+        i. **After allocating new pages to next student please ensure that is should be within barrier range. if (pagesAllocated > barrier) return false;**
+    d. ELSE Keep adding the pages as pagesAllocated += A[i];
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: Aggressive Cows
+
+Intuition:
+We have to place cows within positions given as a input. It means we have to check with minimum distance using which we can place given number of cows within that positions. Here we observe a monotonic functions.
+If with distance 1, 2, 3 we can place 3 cows let say and with distance 4 we cannot place then with even greater number like 5, 6, 7 also, we wont be able to place it.
+Hence remove the other half means apply binary search.
+
+Steps: -
+
+1. Sort the array and take low as first element value and high as difference of last & first element value.
+2. Start looping till low <= high
+    a. Calculate mid
+    b. canPlaceCows(positions, numberOfCows, mid) then store mid as res & low = mid + 1 (since we have to find largest minimal distance).
+    c. ELSE, high = mid - 1;
+3. return res.
+4. canPlaceCows(positions, numberOfCows, mid) functions -
+    a. declare lastPlacedCow as first element & count = 1;
+    b. start looping from 1 to n
+        i. if (positions[i] - lastPlacedCow >= minDist) then count++ and lastPlacedCow = positions[i];
+        ii. if (count == numberOfCows) return true;
+    c. Outside loop return false.
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 13: Stacks & Queues:
+
+*******************************************************************************************************
+
+Problem 1: - Implement Stack Using Arrays
+
+Declare top pointer as -1. Write down push, pop, top, isEmpty, size methods to perform various stack operations.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: - Implement Queue Using Arrays
+
+
+1. Declare front, rear & count as 0. For enqueuing value, add it at rear pointer and increment rear. For giving top value, return value at front pointer. Dequeueing will take place from front pointer.
+2. To make it a circular queue, make sure to add or remove element using % operation.
+3. For adding value: - arr[rear % maxSize] = x;
+4. For removing value: - Return or print arr[front % maxSize] then arr[front % maxSize] = -1; then front++;
+5. For printing value in circular queue: - loop i from front to < rear and print arr[i % maxSize]
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: - Implement Stack using Queue (using single queue)
+
+-> Naive approach using 2 queues: -
+(Only change will be needed for push operation. pop(), top() & isEmpty() operation will remain the same)
+1. Create 2 queues q1 & q2.
+2. Add elements into q2.
+3. Push value *element by element* (means value at the top) from q1 to q2.
+4. Swap q1 & q2.
+
+-> Optimized approach using single queue: -
+(Only change will be needed for push operation. pop(), top() & isEmpty() operation will remain the same)
+
+1. Simulate single queue only
+2. Push element into queue : queue.add(x);
+3. Then push again *size - 1* element again by popping from queue.
+    a. start looping i from 0 till < size - 1 and queue.add(queue.poll());
+This will ensure LIFO.
+
+For pop, use queue.poll();
+For top, use queue.peek();
+For isEmpty, use queue.isEmpty();
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: - Implement Queue using Stack (O(1) amortized method)
+
+Steps: -
+1. Create 2 stacks as input and output
+2. Push elements into input stack.
+3. For pop: -
+    a. Check if output stack is empty. If yes then transfer values from input to output stack element by element till input stack becomes empty and then output.pop();
+    b. ELSE directly output.pop();
+4. For top/peek: -
+    a. Check if output stack is empty. If yes then transfer values from input to output stack element by element till input stack becomes empty and then output.peek();
+    b. ELSE directly output.peek();
+5. Check both the stack and if empty return true ELSE return false;
+
+Here, all operations are performed in O(1) time complexity. Only few pop and top operations will be performed in O(n) in cases of where output stack is empty & we have to perform transferring values from input to output stack.
+So scenarios where most of the operations are performed in O(1) complexity & very few in O(N) complexity then they are considered as "O(1) amortized"
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: - Check for balanced parentheses
+
+1. Create map which to map closing parentheses with opening parentheses and initialize stack.
+2. Convert string to char array.
+3. Start looping i from 0 to s.length()
+    a. if character is opening parentheses then push it into the stack.
+    b. ELSE if check if (stack.isEmpty() || map.get(ch[i]) != stack.peek()) then return false.
+    c. ELSE pop the element.
+4. return stack.isEmpty();  //After iteration stack should be empty. Based on that return true/false
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: - Next Greater Element
+
+-> 1st variant: Non circular array
+
+Intuition: we have to start traversing from back to maintain the elements into increasing order and remove the smaller element from back. Because smaller element cannot be next larger element of any previous elements.
+
+Steps: -
+1. Create stack and nextGreaterElement for storing the result index wise.
+2. Start looping from n - 1 till >=0
+    a. Start while loop to check stack is not empty & element present at top *<=* arr[i] then stack.pop();
+    to remove the smaller element as mentioned in intuition
+    b. Check if stack is empty then nextGreaterElement[i] = -1;
+    c. ELSE nextGreaterElement[i] = stack.peek();
+    d. Outside all looping and if statement and within for loop, push array element into stack: stack.push(arr[i]);
+3. return nextGreaterElement;
+
+
+-> 2nd variant: circular array
+
+Intuition: Same as above. Only exception is: Here, we will copying array elements index wise virtually to make an entry into stack and remove smaller element. So that, any greater element in form of circular array will get from the copied array. Hence, starting the loop from 2n - 1.
+**Also, i < n condition** : Because we have to store the result for actual array and not of the copied array.
+Also, we have started loop from 2n - 1 so let it come in the range of actual array size. This can be checked using i < n.
+
+1. Create stack and nextGreaterElement for storing the result index wise.
+2. Start looping from **2n - 1** till >=0
+    a. Start while loop to check stack is not empty & element present at top **<= arr[i % n]** then stack.pop();
+    to remove the smaller element as mentioned in intuition
+    b. check if (i < n) // reason mentioned above
+        i. Check if stack is empty then nextGreaterElement[i] = -1;
+        ii. ELSE nextGreaterElement[i] = stack.peek();
+    d. Outside all looping and if statement and within for loop, push array element into stack: **stack.push(arr[i % n])**;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: - Sort a Stack
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 13: Stacks & Queues : Part - II
+
+*******************************************************************************************************
+
+Problem 1: Next Smaller Element
+
+Same as Next greater element. Only difference is here we will be removing larger element from the stack. If current value of array is smaller than stack.peek() then remove.
+
+Steps: -
+1. Create stack and Integer[] nextGreaterElement for storing the result index wise.
+2. Start looping from n - 1 till >=0
+    a. Start while loop to check stack is not empty & element present at top *>=* arr.get[i] then stack.pop();
+    to remove the smaller element as mentioned in intuition
+    b. Check if stack is empty then nextGreaterElement[i] = -1;
+    c. ELSE nextGreaterElement[i] = stack.peek();
+    d. Outside all looping and if statement and within for loop, push array element into stack: stack.push(arr.get(i));
+3. return new ArrayList<>(Arrays.asList(nextSmallerElement)); OR new ArrayList<>(List.of(nextSmallerElement));
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: LRU cache (IMPORTANT) : (Least accessed node to Recent accessed node from left to right)
+
+Also remember, if accessOrder is true then also most recent accessed node will be at last position.
+
+Steps: -
+1. Create LinkedHashMap and size and initialize it into constructor.
+2. GET operation: -
+    a. Check if key is not present then return -1;
+    b. get value from the key and remove that key. Then, add key value pair and return the value. We are removing and adding the pair because in LRU last accessed node comes to the last. (Order: Least access node to recent accessed node from left to right)
+3. PUT opertion: -
+    a. Check if key is present then remove that key and new key value pair will be added by step 3.c.
+    b. Check if (map.size() == size) then get the first key: map.keySet().iterator().next() and remove that key. New key value pair will be added by step 3.c.
+    c. Outside both the if statements: Add key value pair passed as an arguments.   //If size is full then step 3.b will remove the least accessed node and 3.c will add new node, if size is not full then step 3.c will get executed directly.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: LFU cache
+
+Here, every put and get operation will be considered as accessed operation. So, we have to maintain the frequency.
+Once, map is full we have to reomve the least frequently used key before inserting a new item. For this problem, when there is a tie (i.e., two or more keys with the same frequency), the least recently used (LRU) key would be invalidated.
+
+Steps: -
+1. Create 3 different maps:
+    a. vals:- cache K and V
+    b. counts:- K and counters (frequency)
+    c. lists:- Counter and item list
+2. Also initialize cap for storing capacity & min = -1 for storing the frequency.
+
+3. GET operation: -
+    a. Check if key is not present then return -1;
+    b. Get the count from counts map : int count = counts.get(key);
+    c. Increase the counter : counts.put(key, count + 1);
+    d. Remove the element from the counter to linkedhashset : lists.get(count).remove(key);
+    e. When current min does not have any data, next one would be the min : if (count == min && lists.get(count).isEmpty()) then min++;
+    f. If next counter value is not available in map, then we should create one with the empty hashSet and then access it. Otherwise, we will get exception.
+    g. Add the key in corresponding frequency list : lists.get(count + 1).add(key);
+    h. Finally return the value.
+4. PUT opertion: -
+    a. Check for negative scenario
+    b. If key does exist, we are returning from here : vals.put(key, value); then **get(key);** (To mark it as accessed)
+    c. If map is full then find the key of least frequency used element and in case of tie find LRU element. int evict = lists.get(min).iterator().next();
+    Remove it from all maps
+    d. If the key is new, insert the value in all 3 maps and current min should be 1 of course
+        vals.put(key, value);
+        min = 1;
+        counts.put(key, 1);
+        lists.get(1).add(key);
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4:
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: Sliding Window maximum
+
+Intuition: We have to maintain the order in decreasing order which means higher element at the top. so, once we receive any element greater than top element it means all element after that will also be smaller. So start removing element from back and empty the queue. Then add this higher element.
+This way we are maintaining the decreasing order.
+Also, adding from the head and removing from the back.
+
+Steps: -
+
+1. Create res array of n - k + 1 size to store the result and ri = 0 for maintaining the index of res array.
+2. Start looping from 0 to n - 1.
+3. Remove numbers out of range: if (!queue.isEmpty() && queue.peek() == i - k) then queue.poll();
+4. Remove smaller numbers in k range as they are useless:
+    while (!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]) then queue.pollLast();
+5. Adding index: queue.offer(i);
+6. Start storing the maximum value of window once index i >= k - 1 then res[ri++] = nums[queue.peek()];
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: Rotten Oranges (We will be using BFS here)
+
+Steps: -
+1. We will start looping i & j to find the total count of oranges (orangeCount) and within same loop will add rotten oranges at the start in the queue.
+2. If orangeCount == 0 then return 0.
+3. Declare minTime, rottenCount as 0. rottenCount will be used to store count of all the rotten oranges and at last we will compare rottenCount with orangeCount. If both are equal then we will return minTime otherwise -1 (which means it's not possible to rot all oranges)
+4. Declare dx, & dy for finding distance in all 4 directions.
+5. Start looping till queue is not empty and **calculate the queue size and add it to rottenCount** in every iteration.
+6. Start loop i within while loop to iterate over rotten oranges coordinates and get point[] as queue.poll().
+7. Start loop j within for loop to check all 4 directions of each coordinate(poistion) of rotten oranges.
+8. Calculate x & y for finding 4 directions movement and check boundary conditions along with no rotten oranges/empty grid (ulta condition laganege sab). If found any then continue;
+9. Outside if statement, mark the coordinate of fresh orange as rotten grid[x][y] = 2; & add it to queue.
+10. Outside both for loops & within while loop, check if queue size is non-zero then minTime++;
+11. Outside while loop, return rottenCount == orangeCount ? minTime : -1; as mentioned in step 3.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: Implement Min Stack
+
+Intuition: - Make sure to use LONG while storing value into stack or assigning it to min because range given is 2^31. Also, we are multiplying it to 2. While returning make sure to return .intValue()
+
+-> During push operation: -
+a. If stack is empty, directly push the value and assign it as min.
+b. If element is smaller than min then, push the modified value in stack as (2 * val - min) and assign actual element as min.
+c. If element is greater then min, normal push.
+
+-> During pop operation: -
+a. If popped value is lesser than min then it means we have popped out the modified value. So, now min needs to be changed as prev min which can be calcuated as (2 * min - popped_value(which is also a modified value))
+b. If popped value is lesser then do nothing as its already popped. No issue
+
+-> During top operation: -
+a. If top value is lesser than min then it means we have modified value so return min directly
+b. Otherwise return top value
+
+-> During getMin operation: -
+a. return min value
+
+=> 2 points to observe: -
+
+-> Why modified_value = 2 * val - min (prev min) will always be lesser than actual value?
+val (new element to be added in stack) < min (prev min) then only we are performing this.
+val - min < 0
+val + val - min < 0 + val //Adding val on both side
+2val - min < val
+2val - min -> Modified value which will always be
+
+-> How 2 * min - stack.peek() will give the prev min value of the stack?
+
+Since, we have added modified value in stack place of actual minimum value and also assigned actual minimal value to the mini.
+So only reshuffling from prev equation. Basically forming
+min(prev min) = 2 * val - modified value    //val was assigned as min. Refer push operation b step
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 8: Stock Span Problem
+
+Intuition: We will be stoing index of each value in stack since we want consecutive days as Stock spanner. Indexes will help to calculate the span.
+We will be removing smaller value indexes while comparing price with current one and will stop if greater price found.
+
+Steps: -
+1. We will be creating Stack (for storing indexes) & ArrayList (for storing elements)
+2. Add value into list and calculate currentIndex as size() - 1.
+3. Check and remove smaller values indexes from stack: while (!stack.isEmpty() && list.get(stack.peek()) <= price)
+then stack.pop();
+4. Above loop broke because of 2 conditions: -
+    a. If stack is empty:
+        - It means no value is bigger than current one. So return list.size() as no. of consecutive days. Before returning add current price index into stack for next iteration.
+    b. If greater value found:
+        - Then get the index at top of stack. Add current price index for next iteration.
+        - Return currentIndex - top;    //to get the consecutive days
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 9: - Find the maximum of minimums of every window size (Time exceeded)
+
+Intuition:
+1. The idea is to find the minimums from every window size. To achieve this, we can use problem 5 of current section with little tweak.
+2. Here, we will remove larger numbers in k range as they are useless (Because we want minimums).
+3. Also instead of returning array of minimums, we will return the maximum element of every window size by using max variable.
+4. Then, we will storing this max value into maxOfMinimums[] arrays as final ans.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 10: - The Celebrity problem:
+
+-> Condition: Everyone knows celebrity but celebrity doesn't know anyone. If this condition meet then return id of celebrity otherwise -1.
+
+-> Observation:
+if (knows(a, b)) is true -> a cannot be a celebrity.
+if (knows(a, b)) is false -> b cannot be a celebrity.
+
+We will use this to solve the problem.
+
+Steps: -
+1. Enter all the ids into the stack
+2. Start looping till (stack.size() > 1) and check for above observations:
+    a. Pop out 2 values from the stack as id1 & id2
+    b. if (knows(id1, id2)) is true then stack.push(id2); Else stack.push(id1);
+    By the end of loop, we will have only 1 id which can or cannot be a celebrity. Other candidates will get discarded.
+3. Pop out that last element as celebrityId outside while loop. Start looping again from i to < n to confirm if its a celebrity id or not
+    a. Check if (celebrityId != i && (Runner.knows(celebrityId, i) || !Runner.knows(i, celebrityId))) then return -1.
+    //-1 tab return karna hai jab celebrityId or i same na ho, otherwise same person. AND
+    //Ya toh celebrity kisiko jaanta ho OR koi bhi ek id celebrity ko na jaanta ho. As per condition mentioned above.
+4. return celebrityId;
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 17: Binary Tree: Part-I
+
+*******************************************************************************************************
+
+Problem 1: Inorder Traversal:
+
+-> Recursive approach : base condition : root == null. Otherwise Left-Root-Right
+
+-> Iterative approach:
+a. Stack or List create karenge. Infinite loop chalu krenge.
+b. If node != null toh stack me node push krenge and move to left.
+c. Else pehle check kr lenge if stack.isEmpty() toh break. Nahi toh stack se node pop krenge, uska value list me add krenge and move to right.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Preorder Traversal:
+
+-> Recursive approach : base condition : root == null. Otherwise Root-Left-Right
+
+-> Iterative approach:
+a. Stack or List create karenge. Infinite loop chalu krenge.
+b. If node != null toh **list me pehle add kr lenge** then stack me node push krenge and move to left.
+c. Else pehle check kr lenge if stack.isEmpty() toh break. Nahi toh stack se node pop krenge and move to right.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Postorder Traversal:
+
+-> Recursive approach : base condition : root == null. Otherwise Left-Right-Root
+
+-> Iterative approach:
+a. 2 Stack or List create karenge. stack1 me root node push kr denge.
+b. Jab tak pehla stack1 empty nai hojata tab tak pehla value pop karenge let say root (resuse krenge) , usko stack2 me add karenge. Fir if same root ka left non-null hai so add it into stack1. Same if root ka right non-null hai so add it into stack1.
+c. Step b se last me stack1 empty hojaega or stack2 full hojaega.
+d. Wapas se while loop jab tak stack2 empty nai hojata and keep popping value and add it into stack. This is the final answer.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: In-order Morris Traversal: (Left-Root-Right) Morris traversal also known as threaded binary tree.
+
+Steps: -
+
+Take curr as root node & start looping while curr != null and handle 3 below cases: -
+1st case: if left is null, add current node (leftmost node) into list and go right
+2nd case: before going left, take left node in prev and make right most node on left subtree connected to current node, then go left
+3rd case: if thread is already pointed to current node, then remove the thread. **Add current node (ROOT)** into list and go to right.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: Preorder Morris Traversal: (Left-Root-Right) Morris traversal also known as threaded binary tree.
+
+Steps: -
+
+Take curr as root node & start looping while curr != null and handle 3 below cases: -
+1st case: if left is null, add current node (leftmost node) into list and go right
+2nd case: before going left, take left node in prev and make right most node on left subtree connected to current node, **add current node (ROOT) into list** then go left
+3rd case: if thread is already pointed to current node, then remove the thread and go to right.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: LeftView Of Binary Tree
+
+Intuition: -
+We have to take first element which is visible from left side. So, we will apply preOrder traversal. Also, we will be using level to leverage the logic.
+
+Steps: -
+1. We will create ds to store the ans and pass 0 as currentDepth of tree to the recursive function.
+2. Recursive function:
+    a. Base condition : if (root == null) then return;
+    b. check if (currentDepth == ds.size()) then add value to ds.  //This check ensure that we are visiting this level of tree for the first so store the value as ans. As this value will be visible first for this level.
+    c. go to left subtree with level + 1: findLeftView(root.left, ds, currentDepth + 1);
+    d. go to right subtree with level + 1: findLeftView(root.right, ds, currentDepth + 1);
+
+NOTE: - For Rightview of Binary Tree, we will swap the 2.c and 2.d steps. We will move to right subtree first as we want right view and then move to left subtree.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: Bottom View of Binary Tree
+
+Intuition: We have to pick last element for each horizontal distance. Hence, we will use Vertical order traversal. Will also maintain the horizontal distance(hd) from the root.
+For root, it should be 0, While moving towards left hd - 1 & towards right hd + 1.
+
+Steps: -
+1. Create ds to store ans, queue to store the node & treeMap to store horizontal distance as key and node.data as value.
+2. We will mark root.hd as 0 and add root node into queue.
+3. Start looping till queue is not empty
+    a. Queue se 1 value pop krne ka and assign it to temp, Similarly temp ka hd as tempHd
+    b. Add tempHd, temp.data as key value pair in map.
+    c. Check agar temp.left null nai hai so calculate hd as temp.left.hd = tempHd - 1; & add it into queue.
+    d. Check agar temp.right null nai hai so calculate hd as temp.right.hd = tempHd + 1; & add it into queue.
+4. Outside while loop, for loop lagao to get entrySet and add it into ds.
+5. return ds;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 8: Top View of Binary Tree:
+
+Same as Bottom View of Binary Tree. Only diffeence is with step (3.b). Yaha par humko check daalna hai (!map.containsKey()). Agar key exist nai krra hai toh map.put kar hai. Because we want top view here. Toh har horizontal line par jo pehla entry hoga wahi top view hoga.
+
+Bottom view me har horizontal line par jo last last element hoga wo bottom view hoga. Islye isme override hone denge key ko. containsKey() check krne ka jrurat nai hai.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 9: Preorder inorder postorder in a single traversal:
+
+-> Simple formula: -
+Create 3 lists: - preOrder, inOrder & postOrder
+Initialize stack with (root, 1). Keep popping value 1 by 1 and check below condition until stack is not empty.
+if num == 1; add into preOrder; increment num & push again into stack; check if left available & add into stack.
+if num == 2; add into inOrder; increment num & push again into stack; check if right available & add into stack.
+if num == 3; add into postOrder;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 10: Vertical order traversal:
+
+Intuition: We will follow x-y coordinate marking here. We have to print nodes from left most to right most means traversing x coordinate from left to right. Then, for each x-coordinate we have to iterate level wise of tree means y coordinate.
+Hence, we will be maintaining a map of map. TreeMap<Row(x), Treemap(Col(y), PriorityQueue<Values>)>.
+PriorityQueue because we want value in sorted order. We are maintaining map of map because duplicates can be present at different level of tree within x-coordinate.
+
+Steps: -
+1. Will create Tuple class to store node, row & col.
+2. Will declare Queue<Tuple>, map of map TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> & List<List<Integer>> ds to store res.
+3. Push root node into queue with row & col as 0.
+4. Apply level order traversal and keep adding value into the map data structure.
+    - Jab tk queue empty ni hojata tb tk loop chalao.
+    - queue se pop kro usme se node, x(row) & y(col) nikal lo.
+    - check kro x key hai ya nai. Agr nai hai to create x key with empty TreeMap.
+    - check kro x key me y key hai ya nai. Agr nai hai to create y key in x with empty PriorityQueue.
+    - x & y key get krke value store kro.
+    - check for left and right node. agr non null hai to queue me push kro with x - 1 & x + 1 respectively. y + 1 hoga dono case me.
+5. Apna map ready hai ans k lye. Loop lagakr Usme se value fetch kro which will give TreeMap<Integer, PriorityQueue<Integer>> entry.
+    - Empty list create kro for every iteration.
+    - Fir loop lagakr PriorityQueue<Integer> values fetch kro as nodes.
+    - Fir jab tak nodes empty ni hojate tab tk list me add kro. ds.get(ds.size() - 1).add(nodes.poll());
+    //ds.size() - 1 -> this will make sure ki ek level ki entry ek hi index pr hori hai list list ki
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 11: Root to node path in a Binary Tree
+
+Intuition: -
+We will keep adding value into res array and check if its a target value. If yes return true nahi toh left recursive call or right recursive call karo if we are getting true for any of calls toh return true.
+Nahi toh last element remove kro and return false.
+
+Steps: -
+1. Create res array List<Integer> and pass it as a reference to recursive function.
+2. Recursive function:
+    - Base condition: if (root == null) return false;
+    - Value ko list me add kro and check ki target value hai. If yes return true.
+    - OR condition me left and right recursive call kro. If we get true for any of calls then return true.
+    - Agar kuch ni mila. Matlab na root target value or na hi uske childrens toh fir remove kro last element ko and return false.
+3. return ds.stream().mapToInt(Integer::intValue).toArray();    // List<Integer> -> int[]
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 12: Max width of a Binary Tree
+
+Intuition: -
+Max width kisi bhi binary tree ka humko mil sakta hai by subtracting indexes of last and first node + 1 for that particular level.
+Indexing mark krne k lye we will be using a formula:
+Left side: - 2*i + 1
+Right side: - 2*i + 2
+
+Ab isko har level par badhate rahenge toh for larger datasets let say 10^5, it will give overflow error. Toh hum isko avoid krne k lye every level pr, mininmum index nikal lenge or usko queue k har element ke num ko is minimum value se minus krenge. Jisse us node ka left or right index calculate krte waqt i ka minimum value rahega.
+
+Steps: -
+
+1. Create Pair class which will store node and index.
+2. Define Queue<Pair>, ans = 0 to store the final address. Add root node into queue with index as 1.
+3. Start looping till queue is not empty.
+    a. Queue ka size nikal lenge and and is level ka minimum value min me store kr lenge. first & last ko 0 initialize kr lenge.
+    b. Start loop i till < size to iterate through each element of queue to mark indexing.
+        - Pair nikal lenge. Usse current node mil jaaega in order of left to right since it is queue ds.
+        - curr nikal lenge uske index - min se:  **int curr = pair.num - min;** To minimize the indexing.
+        - first & last nikal lenge based on i value: - if i == 0 then first = curr. if i == size - 1 then last = curr.
+        - Fir left node non null hai toh uska indexing krke queue me add kr denge: queue.add(new Pair(node.prev, curr*2+1));
+        - Fir right node non null hai toh uska indexing krke queue me add kr denge: queue.add(new Pair(node.next, curr*2+2));
+    c. Find width using formula mentioned above: - ans = Math.max(ans, last - first + 1);
+
+4. return ans;
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 18: Binary Tree: Part-II
+
+*******************************************************************************************************
+
+Problem 1: Level order Traversal / Level order traversal in spiral form
+return type: List<List<Integer>>
+
+Intuition: Here, we have to go level wise and add those list of nodes as final result. Hum log level by level jaaenge or uska left and right not null hai to usko queue me add krenge. Next iteration me queue me jitne bhi values honge that will be list for that level.
+
+Steps: -
+1. Create List<List<Integer>> res & Queue<Node> queue. Root ko push kr do queue me.
+2. Start looping till queue is not empty.
+    a. Find queue size and declare ds as empty list everytime.
+    b. Start iterating for all the elements in queue every iteration (i from 0 till size)
+        - Pop the node at the top from queue and add it into ds.
+        - Agar left not null hai so add it into queue.
+        - Agar right not null hai so add it into queue.
+    c. Outside for loop but within while loop, add ds into res.
+3. return res.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Height of a Binary Tree (Maximum depth of binary tree)
+
+Intuition: Agar root par hai hum so what we will intend to find, 1 + max(l, h) sub tree. Barabar?? To fir pehle move krenge left. Jaise hi leaf node mila to return 0 (This will be our base condition). Then, will move right. Jaise hi leaf node mila return 0. Fir 1 + max(l, h). Aise recursively sub tree ka height find krte hue root tak aaege.
+
+Steps:
+1. Base condition: if (root == null) return 0.
+2. Left subtree ka height find krne k lye left move krenge: int lh = maxDepth(root.left);
+3. Right subtree ka height find krne k lye right move krenge: int rh = maxDepth(root.right);
+4. return Math.max(lh, rh) + 1; //As per intuition
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Diameter of a Binary Tree (Longest path between any 2 nodes. It can or cannot pass via root)
+
+Intuition: - We will try to find the longest path by summation of left & right height for all nodes of a tree and keep checking if its maximum. After traversing each node, finally we will get our diameter.
+So, we will use code of height of binary try with little tweak.
+
+Steps: -
+1. Create an array diameter of size 1 to store the maxi and pass it as a reference to the recursive function.
+2. Recursive function:
+    - Base condition: if (root == null) return 0.
+    - Left subtree ka height find krne k lye left move krenge: int lh = findHeight(root.left, diameter);
+    - Right subtree ka height find krne k lye right move krenge: int rh = maxDepth(root.right, diameter);
+    - Ab maximum length find krenge by adding lh + rh: **diameter[0] = Math.max(diameter[0], lh + rh);**
+    - Will return the height of subtree: - return Math.max(lh, rh) + 1;
+3. return diameter[0];
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: Check if the Binary tree is height-balanced or not
+
+Intuition: - we will find height of left & right sub tree for each node. Then will find the abs difference and check if its greater than 1 then return -1 else keep computing the height for all nodes.
+If tree is balanced then it wont return -1. If at any moment we find that tree is not balanced, we will return -1 and no further computation will take place.
+
+Steps: -
+1. We will call recursive function and compare its output. If its -1 return false else return true:
+return findHeight(root) != -1;
+2. Recursive function:
+    - Base condition: if (root == null) return 0.
+    - Left subtree ka height find krne k lye left move krenge: int lh = findHeight(root.left);
+    - We will check if lh == -1 then return -1
+
+    - Right subtree ka height find krne k lye right move krenge: int rh = findHeight(root.right);
+    - We will check if rh == -1 then return -1
+
+    - After finding lh & rh, we will find abs difference if lh and rh. If its greater than 1 then will return -1.
+    - At last return the height of subtree: - return Math.max(lh, rh) + 1;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: LCA in Binary Tree
+
+Intuition: We will move traverse through each node till we get both nodes whose LCA needs to be found out. If during traversal we reach to null then return null otherwise return root.
+Also after iterating to both left & right subtrees, if we have null for both left and right then return null otherwise return the non null node.
+After finding both right and left for particular node, if koi bhi moment pr dono node non null rahega then that node will be the answer.
+
+Steps: -
+1. Base condition: if (root == null || root == p || root == q) the return root; //Ya to null return hoga to root.
+2. Move to left and right to find the subtrees node.
+3. Check if left is null then return right.
+4. Else if right is null then return left.
+5. Else return root.    //both left and right are not null then we found our result.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: Check if two trees are identical or not
+
+Steps: -
+1. If both are null then return (p == q);
+2. return (p.val == q.val) && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: Zig Zag Traversal of Binary Tree:
+
+Intuition: - Level order traversal use krenge bcoz iterate same way me karna hai. Only difference is alternate level ulta list me store karna hai. So we will maintain a flag. When its true, store element in normal order and when its false store it into reverse order. Flag value after every level iteration, outside for loop but within while loop we will change the flag value to opposite one.
+This will be the only difference.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 8: Boundary Traversal of Binary Tree
+
+Intuition: - If we see carefully we want root node added into the list then all leftmost nodes then all leaf nodes & at the end all rightmost nodes in reverse direction.
+Same thing we will be implementing in the code.
+1. Add root node if its not a leaf node.
+2. Add all leftmost nodes excluding leaf.
+3. Add all leaf nodes using PreOrder.
+4. Add all rightmost nodes in reverse direction excluding leaf node.
+
+Steps: -
+Same as above.
+1. Leaf node ka condition: return root.left == null && root.right == null;
+2. Add all leftmost nodes excluding leaf:
+    - curr me root.left le lenge. Loop chalu krenge jab tk null nai hojata curr.
+    - Check krenge leaf node to nai hai.. Agar nai hai to add it into res list.
+    - if (curr.left != null) then curr.left else curr.right
+
+3.Add all leaf nodes using PreOrder:
+    - check krenge agar leaf node hai toh add it into res list and return;
+    - if (root.left != null) toh left me move krenge.
+    - if (root.right != null) toh right me move krenge.
+
+4. Add all rightmost nodes in reverse direction excluding leaf:
+    - curr me root.right le lenge. ek temp list create krenge Loop chalu krenge jab tk null nai hojata curr.
+        a. Check krenge leaf node to nai hai.. Agar nai hai to add it into temp list.
+        b. if (curr.right != null) then curr.right else curr.left
+    - Loop k baahar ulta condition wala for loop chalaenge bcoz reverse direction me res list me add krna hai.
+
+-------------------------------------------------------------------------------------------------------
 
 

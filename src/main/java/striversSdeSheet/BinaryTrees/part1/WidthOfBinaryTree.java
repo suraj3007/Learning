@@ -1,4 +1,4 @@
-package main.java.dataStructures.Trees;
+package main.java.striversSdeSheet.BinaryTrees.part1;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -63,8 +63,9 @@ public class WidthOfBinaryTree {
              *          2       7
              */
             for (int i = 0; i < size; i++) {
-                int curr = queue.peek().num - min;  //To handle last level. It shouldn't start with 0.
-                Node node = queue.poll().node;
+                Pair pair = queue.poll();
+                int curr = pair.num - min;  //To handle last level. It shouldn't start with 0.
+                Node node = pair.node;
                 if (i == 0) {
                     first = curr;
                 }

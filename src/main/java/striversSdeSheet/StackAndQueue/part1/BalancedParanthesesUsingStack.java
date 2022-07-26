@@ -1,4 +1,4 @@
-package main.java.dataStructures.Stack;
+package main.java.striversSdeSheet.StackAndQueue.part1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +15,11 @@ public class BalancedParanthesesUsingStack {
     };
 
     private static boolean isBalancedParantheses(String exp) {
-        Stack stack = new Stack();
+        Stack<Character> stack = new Stack<>();
         char[] ch = exp.toCharArray();
         for (int i = 0; i < exp.length(); i++) {
             if (ch[i] == '{' || ch[i] == '(' || ch[i] == '[') {
                 stack.push(ch[i]);
-                continue;
             } else if (stack.isEmpty() || !(map.get(ch[i]) == stack.peek())) {
                 return false;
             }else {

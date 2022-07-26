@@ -1,4 +1,4 @@
-package main.java.dataStructures.Trees;
+package main.java.striversSdeSheet.BinaryTrees.part1;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import java.util.Stack;
  * if num == 2; add into inOrder; increment num & push again into stack; check if right available & add into stack.
  * if num == 3; add into postOrder;
  */
-public class TreeTraversalsInOneTraversal {
+public class TreeTraversalsInSingleIteration {
 
     static Node root;
 

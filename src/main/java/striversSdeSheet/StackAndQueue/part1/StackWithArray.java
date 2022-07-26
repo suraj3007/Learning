@@ -1,4 +1,4 @@
-package main.java.dataStructures.Stack;
+package main.java.striversSdeSheet.StackAndQueue.part1;
 
 public class StackWithArray {
 

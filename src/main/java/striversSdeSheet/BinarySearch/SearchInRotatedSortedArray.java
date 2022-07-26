@@ -1,4 +1,4 @@
-package main.java.leetcode;
+package main.java.striversSdeSheet.BinarySearch;
 
 public class SearchInRotatedSortedArray {
 
@@ -8,24 +8,24 @@ public class SearchInRotatedSortedArray {
         int low = 0, high = nums.length - 1;
 
         while (low <= high) {
-            int med = (high + low)/2;
-            if (nums[med] == target) {
-                return med;
+            int mid = (high + low)/2;
+            if (nums[mid] == target) {
+                return mid;
             } 
             //Left side is sorted
-            else if (nums[low] <= nums[med]) {
+            else if (nums[low] <= nums[mid]) {
                 //figure out if element lies on left half or not
-                if (target >= nums[low] && target <= nums[med]) {
-                    high = med - 1;
+                if (target >= nums[low] && target <= nums[mid]) {
+                    high = mid - 1;
                 } else {
-                    low = med + 1;
+                    low = mid + 1;
                 }
             } else {
                 //Right half is sorted
-                if (target >= nums[med] && target <= nums[high]) {
-                    low = med + 1;
+                if (target >= nums[mid] && target <= nums[high]) {
+                    low = mid + 1;
                 } else {
-                    high = med - 1;
+                    high = mid - 1;
                 }
             }
         }

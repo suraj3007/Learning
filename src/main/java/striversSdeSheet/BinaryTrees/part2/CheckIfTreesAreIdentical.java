@@ -1,4 +1,4 @@
-package main.java.dataStructures.Trees;
+package main.java.striversSdeSheet.BinaryTrees.part2;
 
 import java.util.Objects;
 
