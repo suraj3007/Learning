@@ -21,9 +21,10 @@ public class JobSequencingProblem {
         //identify max deadline to create an array
         int maxi_deadline = 0;
         for (int i = 0; i < n; i++) {
-            if (arr[i].deadline > maxi_deadline) {
-                maxi_deadline = arr[i].deadline;
-            }
+//            if (arr[i].deadline > maxi_deadline) {
+//                maxi_deadline = arr[i].deadline;
+//            }
+            maxi_deadline = Math.max(maxi_deadline, arr[i].deadline);
         }
 
         //creating an array of size = maximum deadline & initializing them to -1

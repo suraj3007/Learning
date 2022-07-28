@@ -29,8 +29,8 @@ public class FractionalKnapsack {
                 currentWeight += arr[i].weight;
                 result += arr[i].value;
             } else { //If fraction of weight needs to be taken.
-                int remain = W - currentWeight;
-                result += ((double) arr[i].value / (double) arr[i].weight) * (double) remain;
+                int remaining = W - currentWeight;
+                result += ((double) arr[i].value / (double) arr[i].weight) * (double) remaining;
                 break;
             }
         }

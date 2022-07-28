@@ -6,9 +6,11 @@ public class Node {
     public int hd; //horizontal distance
     public Node left, right;
 
+    public Node next;
+
     Node(int data) {
         this.data = data;
         hd = Integer.MAX_VALUE;
-        left = right = null;
+        left = right = next = null;
     }
 }

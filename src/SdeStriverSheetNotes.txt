@@ -697,7 +697,7 @@ Steps: -
 5. check if arrival time is greater than departure time then additional platform won't be needed. Also increment j.
     else if (arr[i] > dep[j]) then plat_needed--; Also, j++;
 6. Check for maximum no. of platform value.
-    if (plat_needed > result) then result = plat_needed
+    if (plat_needed > result) then result = plat_needed OR result = Math.max(result, plat_needed);
 7. Outside loop, return result;
 
 -------------------------------------------------------------------------------------------------------
@@ -792,7 +792,7 @@ Steps: -
 Problem 3: Combination sum - I
 
 1. Create a List<List<Integer>> ans for storing the result & pass as a reference. Also, pass empty list ds for each subset along with index = 0.
-2. Base condition: - 2 if conditions if (index == arr.length) ->  if (target == 0) then add to the ans list -> then return
+2. Base condition: - 2 if conditions : if (index == arr.length) ->  if (target == 0) then add to the ans list -> then return
 3. Apply pick & non-pick technique: -
     a. pick after checking if (target >= arr[index])
         i. ds.add(arr[index]);  //Remain at same index as it is asked in question that you can take value for any no. of times as part of combination
@@ -866,7 +866,7 @@ Problem 2: - N queens Problem
 
 Intuition: -
 1. We will hold 1 column at a time and traverse for each row if we can place a queen or not. So, we will call function recursively for every column. Within each recursive call, traverse for each row (0 to n).
-2. As we know Queen can attack in 8 directions. But here we will be moving from left to right so, it will cancel out 4 rightward directions attcack + 1 column level attack (since we will place only 1 Queen in 1 column as per conditions).
+2. As we know Queen can attack in 8 directions. But here we will be moving from left to right so, it will cancel out 4 rightward directions attack + 1 column level attack (since we will place only 1 Queen in 1 column as per conditions).
 3. We have to take care for 3 types of attack since 5 are cancelled out: -
     a. Check for left diagonal: - row
     b. Check for lower diagonal: - row + column
@@ -895,9 +895,9 @@ Intuition: -
 1. Traverse for each row,column to find out empty place.
 2. Then try out char 1 to 9 which can be filled for this empty space.
     a. Check by keeping row constant and moving i
-    b. Check by moving i and keepung column constant
+    b. Check by moving i and keeping column constant
     c. Check for 3 * 3 matrix using formula: if **(board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)**
-3. After filling that vacant space, call function recursively to check if all the empty spaces within that rcursion tree get filled or not. If yes then return true ELSE after that recursion remove that char from that place to make it vacant.
+3. After filling that vacant space, call function recursively to check if all the empty spaces within that recursion tree get filled or not. If yes then return true ELSE after that recursion remove that char from that place to make it vacant.
 4. If none of the char from 1 t0 9 can be filled then too return false.
 5. Outside all for loop code will come when it will check all the places and now none of the position is empty. It means sudoku is solved. So return true.
 
@@ -1072,6 +1072,8 @@ Steps: -
     c. if (pagesAllocated + A[i] > barrier) then increment noOfStudents by 1 & pagesAllocated = A[i].
         i. **After allocating new pages to next student please ensure that is should be within barrier range. if (pagesAllocated > barrier) return false;**
     d. ELSE Keep adding the pages as pagesAllocated += A[i];
+    e. After for loop check, if noOfStudents > B then return false;
+    f. return true;
 
 -------------------------------------------------------------------------------------------------------
 
@@ -1308,6 +1310,17 @@ Steps: -
 
 Problem 6: Rotten Oranges (We will be using BFS here)
 
+Layman terms: -
+1. Sbse pehle saare coordinate par jaakr orangeCount nikal lenge or rottenOranges ke coordinate ko queue me daal dene.
+2. Agr orangeCount == 0 then return 0;
+3. minTime, rottenCount ye sb declare kr lenge or all 4 directions me jaane k lye dx & dy
+4. Jab tk queue empty nai hojata, size queue ka nikalenge or rottenCount me add kr lenge.
+5. Fir saare queue k values pr iterate krenge (i) or usme 4 directions me jaaenge (j).
+6. Next x & y coordinate nikalenge. Or ulta condition lagaenge boundary ka OR next grid empty toh nai hai OR next orange rotten toh nai hai.. if yes then continue.
+7. Nai toh us ccordinate ko 2 mark krenge and queue me add kr denge.
+8. Bahar check kr lenge, agr queue empty nai hai to min++;
+9. Bahar saare loops k dekh lenge, return rottenCount == orangeCount ? mintime : -1;
+
 Steps: -
 1. We will start looping i & j to find the total count of oranges (orangeCount) and within same loop will add rotten oranges at the start in the queue.
 2. If orangeCount == 0 then return 0.
@@ -1315,7 +1328,7 @@ Steps: -
 4. Declare dx, & dy for finding distance in all 4 directions.
 5. Start looping till queue is not empty and **calculate the queue size and add it to rottenCount** in every iteration.
 6. Start loop i within while loop to iterate over rotten oranges coordinates and get point[] as queue.poll().
-7. Start loop j within for loop to check all 4 directions of each coordinate(poistion) of rotten oranges.
+7. Start loop j within for loop to check all 4 directions of each coordinate(position) of rotten oranges.
 8. Calculate x & y for finding 4 directions movement and check boundary conditions along with no rotten oranges/empty grid (ulta condition laganege sab). If found any then continue;
 9. Outside if statement, mark the coordinate of fresh orange as rotten grid[x][y] = 2; & add it to queue.
 10. Outside both for loops & within while loop, check if queue size is non-zero then minTime++;
@@ -1362,7 +1375,7 @@ min(prev min) = 2 * val - modified value    //val was assigned as min. Refer pus
 
 Problem 8: Stock Span Problem
 
-Intuition: We will be stoing index of each value in stack since we want consecutive days as Stock spanner. Indexes will help to calculate the span.
+Intuition: We will be storing index of each value in stack since we want consecutive days as Stock spanner. Indexes will help to calculate the span.
 We will be removing smaller value indexes while comparing price with current one and will stop if greater price found.
 
 Steps: -
@@ -1448,7 +1461,7 @@ Problem 3: Postorder Traversal:
 a. 2 Stack or List create karenge. stack1 me root node push kr denge.
 b. Jab tak pehla stack1 empty nai hojata tab tak pehla value pop karenge let say root (resuse krenge) , usko stack2 me add karenge. Fir if same root ka left non-null hai so add it into stack1. Same if root ka right non-null hai so add it into stack1.
 c. Step b se last me stack1 empty hojaega or stack2 full hojaega.
-d. Wapas se while loop jab tak stack2 empty nai hojata and keep popping value and add it into stack. This is the final answer.
+d. Wapas se while loop jab tak stack2 empty nai hojata and keep popping value and add it into list. This is the final answer.
 
 -------------------------------------------------------------------------------------------------------
 
@@ -1531,11 +1544,11 @@ if num == 3; add into postOrder;
 Problem 10: Vertical order traversal:
 
 Intuition: We will follow x-y coordinate marking here. We have to print nodes from left most to right most means traversing x coordinate from left to right. Then, for each x-coordinate we have to iterate level wise of tree means y coordinate.
-Hence, we will be maintaining a map of map. TreeMap<Row(x), Treemap(Col(y), PriorityQueue<Values>)>.
+Hence, we will be maintaining a map of map. TreeMap<xPos, Treemap(yPos, PriorityQueue<Values>)>.
 PriorityQueue because we want value in sorted order. We are maintaining map of map because duplicates can be present at different level of tree within x-coordinate.
 
 Steps: -
-1. Will create Tuple class to store node, row & col.
+1. Will create Tuple class to store node, row(xPos) & col(yPos).
 2. Will declare Queue<Tuple>, map of map TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> & List<List<Integer>> ds to store res.
 3. Push root node into queue with row & col as 0.
 4. Apply level order traversal and keep adding value into the map data structure.
@@ -1549,7 +1562,7 @@ Steps: -
     - Empty list create kro for every iteration.
     - Fir loop lagakr PriorityQueue<Integer> values fetch kro as nodes.
     - Fir jab tak nodes empty ni hojate tab tk list me add kro. ds.get(ds.size() - 1).add(nodes.poll());
-    //ds.size() - 1 -> this will make sure ki ek level ki entry ek hi index pr hori hai list list ki
+    //ds.size() - 1 -> this will make sure ki ek level ki entry ek hi index pr hori hai list ki
 
 -------------------------------------------------------------------------------------------------------
 
@@ -1564,8 +1577,8 @@ Steps: -
 2. Recursive function:
     - Base condition: if (root == null) return false;
     - Value ko list me add kro and check ki target value hai. If yes return true.
-    - OR condition me left and right recursive call kro. If we get true for any of calls then return true.
-    - Agar kuch ni mila. Matlab na root target value or na hi uske childrens toh fir remove kro last element ko and return false.
+    - Another if condition me left and right recursive call kro. If we get true for any of calls then return true.
+    - Agar kuch ni mila. Matlab na root target value hai or na hi uske childrens toh fir remove kro last element ko and return false.
 3. return ds.stream().mapToInt(Integer::intValue).toArray();    // List<Integer> -> int[]
 
 -------------------------------------------------------------------------------------------------------
@@ -1583,7 +1596,7 @@ Ab isko har level par badhate rahenge toh for larger datasets let say 10^5, it w
 Steps: -
 
 1. Create Pair class which will store node and index.
-2. Define Queue<Pair>, ans = 0 to store the final address. Add root node into queue with index as 1.
+2. Define Queue<Pair>, ans = 0 to store the final address. Add root node into queue with index as 0.
 3. Start looping till queue is not empty.
     a. Queue ka size nikal lenge and and is level ka minimum value min me store kr lenge. first & last ko 0 initialize kr lenge.
     b. Start loop i till < size to iterate through each element of queue to mark indexing.
@@ -1673,7 +1686,7 @@ return findHeight(root) != -1;
 
 Problem 5: LCA in Binary Tree
 
-Intuition: We will move traverse through each node till we get both nodes whose LCA needs to be found out. If during traversal we reach to null then return null otherwise return root.
+Intuition: We will traverse through each node till we get both nodes whose LCA needs to be found out. If during traversal we reach to null then return null otherwise return root.
 Also after iterating to both left & right subtrees, if we have null for both left and right then return null otherwise return the non null node.
 After finding both right and left for particular node, if koi bhi moment pr dono node non null rahega then that node will be the answer.
 
@@ -1730,5 +1743,178 @@ Same as above.
     - Loop k baahar ulta condition wala for loop chalaenge bcoz reverse direction me res list me add krna hai.
 
 -------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
 
+Day 19: Binary Tree: Part-III
 
+*******************************************************************************************************
+
+Problem 1: Maximum path sum
+
+Intuition:
+Traverse through every node and calculate leftPathsum and rightPathSum. Then calculate maxi by summing current node with both path sum.
+During every node traversal in subtree return the node.val + max(leftPathsum, rightPathSum). This max will ensure whether to take a left path or right path in an elongated subtree.
+
+Steps: -
+1. Create maxi[] for storing the ans and pass it as reference to the recursive function.
+2. Recursive function:
+    - Base condition: if root is null return 0;
+    - Calculate leftPathSum: int leftPathSum = Math.max(0, findMaxSum(root.left, maxi));
+    // Math.max(0, ..) is used to avoid negative sum. If sum we get as -ve then return 0. Bcoz -ve sum wont maximize the sum.
+
+    - Calculate rightPathSum: int rightPathSum = Math.max(0, findMaxSum(root.right, maxi));
+    // Math.max(0, ..) is used to avoid negative sum. If sum we get as -ve then return 0. Bcoz -ve sum wont maximize the sum.
+
+    - Calculate maxi: maxi[0] = Math.max(maxi[0], root.val + leftPathSum + rightPathSum);
+    - return root.val + Math.max(leftPathSum, rightPathSum);    //Reason mentioned in intuition above.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Construct Binary Tree from inorder and preorder
+
+Intuition:
+Preorder : Root Left Right & Inorder : Left Root Right
+
+Preorder arr se jo bhi pehla value rehta hai that will be root. Toh usko root bana lenge. Fir Inorder array me wo root value search krte hai. And us root ka left element will be part of left sub tree and right wala will be part of right sub tree.
+Toh Preorder me bhi Root pehla element se aage jitna Inorder ke left me elements hai same number of elements Preorder se bhi le lenge for further computation.  --> This is for building left sub tree.
+
+For right subtree: - 1st element + Inorder k left wale element + 1 k baad se Preorder array k end tak consider krenge.
+
+Har traversal me yahi problem ko sub problem me convert krna hai. Naya set of Preorder & Inorder banaenge for building left and right sub tree from root.
+
+Steps: -
+1. Create map and insert all array elements of Inorder inside map.
+2. Pass everything to recursive function :
+int[] preorder, int preStart (as 0), int preEnd (as length - 1), int[] inorder, int inStart (as 0), int inEnd (as length - 1), Map<Integer, Integer> map
+3. Recursive function:
+    - Base condition : if (preStart > preEnd || inStart > inEnd) return null;   //If preorder or inorder arr gets empty
+    - Preorder ka pehle element lekr usko root bana denge (root).
+    - Map me se is root value ka index nikal lenge (inRoot). Then, nums on left calculate kr lenge :
+    int numsLeft = inRoot - inStart;
+
+    - Fir left or right sub tree k lye recursive call by splitting Inroder & Preorder using 2 pointers each.
+    root.left = buildTree(preorder, preStart + 1, preStart + numsLeft, inorder,
+                inStart, inRoot - 1, map);
+    root.right = buildTree(preorder, preStart + numsLeft + 1, preEnd, inorder,
+                inRoot + 1, inEnd, map);
+
+    - return root;
+4. return root;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Construct Binary Tree from inorder and postorder
+
+Postorder : Left Right Root & Inorder : Left Root Right
+
+Same as problem 2 above. Bas is baar aage ki jagah apan piche se value pick krenge for root because postOrder me root last me rehta hai.
+While dividing pointers. Inorder k lye same rahega..
+-> Postorder ke liye:
+For left elements: hum postStart se **postStart + numsLeft - 1** krenge (Basically first utne numbers will be left side as PostOrder me start k left elements hote hai.)
+For right elements: hum **postStart + numsLeft** se postEnd - 1 tak pick krenge
+
+Rest code and steps will be same. Only postorder related pointers will differ. And node will be created using last node of postOrder array.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: Symmetric Binary Tree
+
+Intuition:
+If considerin the left and right of root they should be same. But uske baad if we see in mirror left will become right from the centre.
+So, hum isi ko follow krenge. We will go left and right simultaneously and check if values are equal or not. Agr equal hai in all traversal toh symmetric otherwise non-symmetric.
+
+Steps: -
+1. Base condition : if (left == null || right == null) return left == right;
+2. check dono value equal hai ya nai. If no then return false;     //matlab non-symmetric
+3. return checkSymmetric(left ka left, right ka right) && checkSymmetric(left ka right, right ka left);
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: - Flatten Binary Tree to LinkedList
+
+Condition:
+1. The "linked list" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.
+2. The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+
+Intution: Since it is mentioned that it should be  pre-order traversal, toh preOrder me after rightmost elemnent of left sub tree, iteration goes to the right element of root node. Isi observation ka use krenge hum.
+Morris Traversal: Agar yaad kre toh hum left node ke right most node tak jaate hai or thread banate hai root node se.
+Same cheez yaha krenge. Instead of pointing thread to root, we will tie thread to root.right
+
+Steps: -
+1. Declare curr pointing to root node.
+2. Start looping till curr != null
+    a. **Check if curr.left != null**
+        - prev me root ka left le lenge.
+        - while loop lagakr iterate krenge jb tk left (prev) ka rightmost element ni mil jaata.
+        - Rightmost node ka right null hoga usme, curr.right ka address daal denge.
+        - curr.right me curr.left daal denge.      //because ab curr ka next element curr.left hoga after this link.
+        - Then **curr.left = null;**
+    b. curr = curr.right;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: - Check for Children Sum Property (root node will be summation of all child nodes)
+Condition: You cannot decrement the value however you can increment value by +1 for any number of time.
+
+Intuition: -
+1. Given condition ka fayda uthaaenge. kam ni kr sakte to sum value ko badhaaenge. Hum left or right node k data ka sum lenge. Agar sum > root ka data then root.data ko sum assign kr denge.
+2. Agar sum < root ka data toh dono child ko root.data assign kr denge.    //Isse kya hoga ki while going down hum values badhate jaaenge jisse wapas aate waqt root ka value badh jaaaye decrement krne ka jrurat hi na pade.
+3. Then move left.. fir move right..
+4. Now backtrack. left non null toh sum it into total. Right non null hai to sum it into total.
+5. Fir check kro agr leaf node nai hai wo, means both left OR right dono me se koi non null hai to assign root.data = total;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7: - Mirror Binary tree
+
+Observation: Left becomes right and right becomes left -> Mirroring
+So, hum kya krenge left ke nodes me right ko swap krte jaaenge or right me left nodes ko swap krenge.
+Swap krne k lye left node ko pehle hi temp me rakh lenge.
+
+Base condition: - if (node == null) return null;
+Node temp = node.left;
+node.left = mirrorNode(node.right);
+node.right = mirrorNode(temp);
+return node;
+
+-------------------------------------------------------------------------------------------------------
+
+*******************************************************************************************************
+
+Day 20: Binary Search Tree
+
+*******************************************************************************************************
+
+Problem 1: Populate Next Right pointers of Tree
+Conditions: -
+Here, we have to connect all nodes on each level to its next node. Or last node rahega agar toh uske next me null fill krna hai. By default, sbka next pointer is null.
+
+Intuition: -
+Har level ke current node k next me next node ka address fill karna hai. Toh humko right node ka address chahiye. Since level wise jaana hai toh use level order traversal. Plus right node pehle chhahiye to hum reverse kr denge. Means right node pehle store krenge then left node. -> Infer to reverse level order traversal.
+
+Steps: -
+1. Cover negative scenario.
+2. Create queue and push root into queue.
+3. Start looping till queue is not empty
+    - Declare Node rightNode = null; //To store right node address.
+    - Start looping i (0 to size)
+        a. Queue se value poll krenge ans curr me store krenge.
+        b. curr.next = rightNode    //Last node k lye null jaaega fulfilling the condition
+        c. rightNode = curr     //Storing curr into rightNode. Jisse next iteration me iske left ka value pop hoga jiske next me humko right ka address daalna hai.. wo rightNode se mil jaaega and this will continue for all iteration.
+        d. Agr curr.right non null hai to **push right node first and then left node**
+        //Sirf curr.right non null check krre hai bcoz mentioned hai problem me ki it will be perfect binary tree and all levels will be completely filled.
+4. return root.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Search given Key in BST
+
+Intuition: BST hai.. toh agr key chota hai toh left side me jaao or bada hai to right side me jaao.
+
+Steps: -
+while (root != null && root.val != val) {
+    root = val < root.val ? root.left : root.right;
+}
+return root;
+
+-------------------------------------------------------------------------------------------------------

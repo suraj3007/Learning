@@ -24,9 +24,7 @@ public class MaximumPlatforms {
                 j++;
             }
 
-            if (plat_needed > result) {
-                result = plat_needed;
-            }
+            result = Math.max(result, plat_needed);
         }
         return result;
     }
