@@ -1,4 +1,4 @@
-package main.java.striversSdeSheet.BinarySearchTree;
+package main.java.striversSdeSheet.BinarySearchTree.part1;
 
 import main.java.striversSdeSheet.BinaryTrees.Node;
 

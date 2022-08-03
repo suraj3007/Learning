@@ -391,7 +391,7 @@ This can be reduced as as Y = XR ^ K. Here, we have to find the frequency of suc
 
 Steps (B is target XOR):
 1. Initialize map & count = 0, xor = 0.
-2. Iterate over each element j and find prefix xor = xor ^ j    //Equation expianed above
+2. Iterate over each element j and find prefix xor = xor ^ j    //Equation explained above
 3. Check if (xor == B) then increment count by 1.
 4. Check if (map.containsKey(xor ^ B)) then count += map.get(xor ^ B)
 5. Check if (map.containsKey(xor)) then map.put(xor, map.get(xor) + 1); ELSE
@@ -619,8 +619,8 @@ Intuition: - a + b + c = 0. Hence, a = - (b + c). So, we will keep 'a' constant 
 
 1. Check for -ve scenario: if length < 3 return empty list.
 2. Sort an array to get duplicates together & initialize List<List<Integer>> res
-3. Start loop i (o -> < length - 2)
-4. Major if condition: (i == 0 || (i > 0 && nums[i] != nums[i - 1])) // to avoid duplicates for a
+3. Start loop i (0 -> < length - 2)
+4. Major if condition: (i == 0 || (i > 0 && nums[i] != nums[i - 1])) // to avoid duplicates for 'a'
     a. Declare low = 0 & high = length - 1 & **sum = -nums[i]**
     b. Start looping till low < high
     c. if (nums[low] + nums[high] == sum) then add it into res as Arrays.List in sequence of i, low & high to get unique triplets.
@@ -1918,3 +1918,177 @@ while (root != null && root.val != val) {
 return root;
 
 -------------------------------------------------------------------------------------------------------
+
+Problem 3: Check is a BT is BST or not
+
+Intuition: Left pr root se chota value hona chahiye and right me root se bada value hona cahhiye. But jaise jaise tree me niche jaaenge we dont have to only care about chota and bada wrt to root but also about range.
+Toh hum minValue or maxValue define krenge as RANGE. Long.MIN_VALUE, Long.MAX_VALUE
+Jab bhi left traverse krenge tb range should be (minVal, root.val) and for right it should be (root.val, maxVal).
+return isValidBST(root.left, minVal, root.val) && isValidBST(root.right, root.val, maxVal);
+
+Iske pehle -ve scenario check kr lenge if root is null return null. Or boundary condition ki root.val -> maxVal or minVal k bich me hi hai.
+
+ -------------------------------------------------------------------------------------------------------
+
+ Problem 4: Construct BST from preorder traversal
+
+ Intuition: Problem 3 ka approach use krenge. Yaha pr range me khelenge. Par yaha sirf upper bound se khelenge.
+
+ Steps: -
+ 1. Ek upper bound define kr lenge or ek reference variable jo arr ko traverse krega. Will pass this to recusrive function
+ 2. Recursive function:
+    - Base condition: - if (i[0] == preorder.length || preorder[i[0]] > bound) return null;
+    //preorder[i[0]] > bound -> Ye make sure krega ki agr koi value range k bahar hai or right ya left me plant nai kr sakte to null return krega.
+    - Node bana lenge arr se value pick krke.
+    - Fir root.left k lye recursive function call krnenge with bound as root.val.   //Left me jaane k lye upper bound would be root only and lower bound node ka value khud rahega. Toh islye lower bound ka jrurat nai hai.
+    - Then root.right k lye recursive function call krnenge with bound as bound.   //Bcoz hum upper bound liye hai.
+    - return root;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: - Find the inorder predecessor/successor of a given Key in BST.
+
+Successor: -
+Successor matlab key value se just 1 bada value (immediate greater)
+
+Declare successor & predecessor as -1.
+
+1. Start looping till root != null
+2. check krenge agr key >= root.val se toh move right.
+3. Jaise hi root.val bada hua, successor variable me root.val store kro and then move to left. Ab left node root ban jaaega. Toh loop me fir step 2 execute hoga
+//Left me jaaene ka reason because uske right me or bade values honge which cannot be immediate greater.
+
+Predecessor: -
+Predecessor matlab key value se just 1 chota value. (immediate smaller)
+
+1. Start looping till root != null
+2. check krenge agr key <= root.val se toh move left.
+3. Jaise hi root.val chota hua, predecessor variable me root.val store kro and then move to right. Ab right node root ban jaaega. Toh loop me fir step 2 execute hoga
+//Right me jaaene ka reason because uske left me or chote values honge which cannot be immediate smaller.
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 20: Binary Search Tree - Part II
+
+*******************************************************************************************************
+
+Problem 1: Floor in BST:
+
+Same as finding predecessor. Problem 5 of previous section.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Ceil in BST:
+
+Same as finding successor. Problem 5 of previous section.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Find K-th smallest element in BST
+
+Apply inorder traversal (Left Root Right) using iterative approach. Bas bich me ek condition add karna hai jaha pop karte waqt hum count decrement krenge or check karenge if its == 0. Then, wahi se node ka value return kar do.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: Find K-th largest element in BST
+
+Apply reverse inorder traversal (Right Root Left) using iterative approach. Bas bich me ek condition add karna hai jaha pop karte waqt hum count decrement krenge or check karenge if its == 0. Then, wahi se node ka value return kar do.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: Find a pair with a given sum in BST (Time exceeded)
+
+Create class BSTIterator (Refer next problem) having both functionality next() & previous.
+However, prev is managed using isReverse flag. -> true for prev & false for next.
+
+- Now, in actual class create 2 objects (l & r) which will take isReverse as parameters.
+- get i & j using l.next() & r.next()
+- Start looping till i < j
+    - check if i + j == k return true
+    - else if (i + j < k) i = l.next();
+    - else j = r.next();
+- return false.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: BST Iterator
+
+Yaha humko BST Iterator design karna hai. Humko root node diya rahega. Or ye humko inorder traversal of BST par design karna hai. We have to implement 3 stuffs:
+1. Constructor call hai
+2. hasNext() -> If stack empty nai hai toh return true else false.
+3. next() -> Jo bhi inorder k hisab se value hoga wo return krna hai.
+
+- ek stack initialize kar lenge.
+1. Constructor call me hi hum root ko lekr saare left wale element store kr lenge. (pushAll() method bana lenge)
+for (; node != null; stack.push(node), node = node.left);
+
+2. hasNext() - check kr lenge if stack is empty or not: return !stack.isEmpty();
+
+3. next():
+    - Stack se node pop karenge.
+    - Or fir us node ke saare left element stack me push kr denge using pushAll(node.right);
+    - return node.val;
+
+To find previous, we would have to add all rightmost node first. And after popping go to left and again add rightmost node of that left node. This will be the only change.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7.1: Size of largest BST in Binary Tree
+
+BST me largest value from left < root.val < BST me smallest value from right (Iska matlab humko left or right side computed chahiye. So, we will use postorder traversal)
+Yahi main funda yaad rakhna hai.
+
+Steps:
+- Ek NodeValue krke class bana lenge jisme min, max, size maintain krenge constructor se
+1. Agr root == null hai so return new NodeValue(Integer.MAX_VALUE, Integer.MIN_VALUE, 0); min ko max rakhenge or max ko min jisse easy comparsion hojaye.
+2. move left and right.
+3. Check for above intuition: if (left.maxNode < root.val && root.val < right.minNode)
+    return new NodeValue(Math.min(left.minNode, root.val), Math.max(right.maxNode, root.val),
+                    left.maxSize + right.maxSize + 1);
+4. For invalid BST: -
+    return new NodeValue(Integer.MIN_VALUE, Integer.MAX_VALUE,
+                Math.max(left.maxSize, right.maxSize));
+//Min ko ekdum kr do or max ko ekdum max jisse intuition humesha false ho. Bcoz invalid bst humko nahi compute krna hai
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 7.2: Maximum sum of largest BST in Binary Tree
+
+Same as above intuition. Isme ans krke reference carry karenge.
+- Ek NodeValue krke class bana lenge jisme isBST, max, min, sum maintain krenge constructor se
+1. Agr root == null hai so return new T(true, Integer.MIN_VALUE, Integer.MAX_VALUE, 0); min ko max rakhenge or max ko min jisse easy comparsion hojaye.
+2. move left and right.
+3. Boundary condition check krenge to find if invalid bst and return new T();
+4. For valid BST: -
+    final int sum = root.val + left.sum + right.sum;
+    ans[0] = Math.max(ans[0], sum);
+    return new T(true, Math.max(root.val, right.max), Math.min(root.val, left.min), sum);
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 8: Serialize and deserialize Binary Tree
+
+-> For Serialization: -
+We will be appying level order traversal and adding n for null and delimiter will be space. Since, we are adding n for null, we will not check for left.null or right.null. Instead will directly add value into the queue. Only we will check with node == null then res.append("n "). Otherwsie res.append(node.val + " ");
+
+-> For Deserialization: -
+1. We will again be declaring queue and convert string into string[] using split method.
+2. With help of first value we will create root and add it into queue. //Everytime while creating a node, add it into array.
+3. Now start looping i from (1 to length)
+    - Pop the node (parent) from queue.
+    - Check if (!values[i].equals("n")) then create node (left) using values[i] and add it into parent.left. Also add it into queue.
+    - Check if (!values[**++i**].equals("n")) then create node (right) using values[i] and add it into parent.right. Also add it into queue.
+4. return root;
+
+//Dont forget to wrap values[i] & values[0] in Integer.parseInt()
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 22: Graph - Part I
+
+*******************************************************************************************************
+
+
+

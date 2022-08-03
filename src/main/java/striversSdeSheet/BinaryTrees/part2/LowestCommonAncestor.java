@@ -41,7 +41,7 @@ public class LowestCommonAncestor {
             return right;
         } else if (right == null) {
             return left;
-        } else {    //both left and right are not null then we found our result.
+        } else {    //both left and right are not null then we have our both nodes under root.
             return root;
         }
     }
