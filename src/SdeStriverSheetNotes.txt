@@ -2088,7 +2088,181 @@ We will be appying level order traversal and adding n for null and delimiter wil
 
 Day 22: Graph - Part I
 
+-> Coding ninja me edges[][] diya hai sirf toh create adjacency matrix.
+
+public static int[][] createAdjMat(int vertex, int[][] edges) {
+
+        int[][] adjacency_matrix = new int[vertex][vertex];
+
+        for (int i = 0; i < edges[0].length; i++) {
+            adjacency_matrix[edges[0][i]][edges[1][i]] = 1;
+            adjacency_matrix[edges[1][i]][edges[0][i]] = 1;
+        }
+
+        return adjacency_matrix;
+    }
+
+-> Agar edges[][], vertex (n), edges(m) sb mentioned hai toh create adjacency list.
+
+ArrayList<ArrayList< Integer >> adjList = new ArrayList<>(n + 1);   //1 to N hai vertices
+        for(int i = 0; i <= n; i++){    //for vertices
+            adjList.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < m; i++) //for edges
+        {
+            adjList.get(edges[i][0]).add(edges[i][1]);
+            adjList.get(edges[i][1]).add(edges[i][0]);
+        }
+
 *******************************************************************************************************
 
+Problem 2: - DFS traversal
 
+1. Isme pehle list (for storing result) & visited array(to check if node is visited or not) bana lenge.
+2. Multiple component ke lye loop lagaenge i (0 to V) and if wo visited nai hai toh call recursive function.
+3. Recursive function: -
+    - Add kar lo list me ye node and mark it as visited.
+    - for loop lagao to go through all adjacent element (for (Integer it : adj.get(node))) and loop k andar check kro if that node is unvisited then call dfs with that node.    //yaha hum adjacent nodes pr jaaenge 1 by 1 or jb visited hojaega saara to waps aaenge to iterate through next adjacent element.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: - BFS traversal
+
+-> BFS Traversal: -
+
+Traverse karenge after storing value in queue for multiple components. Jab tak queue empty ni hojata for unvisited nodes.
+
+1. Isme pehle list res(for storing result) & visited array(to check if node is visited or not) bana lenge.
+2. first node 0 ko push kr denge and mark it as visited.
+3. Loop lagaenge jab tak queue empty nai hojata
+    - Poll krenge node. and add it into list.
+    - Adjacent node ke liye loop lagaenge and if those nodes are unvisited then mark it as visited & add it into queue.
+4. return res;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: - Detect A cycle in Undirected Graph using BFS
+
+-> BFS Traversal: -
+
+Traverse karenge after storing value in queue for multiple components. Vertex or parent ka mapping rakhenge using Node class or bfs traversal apply karenge for unvisited nodes. In case, koi vertex visited mila to check karenge ki if parent != i (current vertex of adjacency list). Agar != raha matlab cycle detected. Or agar == raha to matlab adjacent node hai. Move ahead for detection.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: - Detect A cycle in Undirected Graph using DFS
+
+Traverse karenge using recursion for multiple components. Vertex or parent ka mapping rakhenge or dfs traversal apply karenge for unvisited nodes. In case, koi vertex visited mila to check karenge ki if parent != i (current vertex of adjacency list). Agar != raha matlab cycle detected. Or agar == raha to matlab adjacent node hai. Move ahead for detection.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: - Detect A cycle in Directed Graph using DFS
+
+Traverse karenge using recursion for multiple components. Isme 2 array maintain karenge -> visited and dfsVisited. For every visited node dono ko true karenge. Or jaise hi recursion particular vertex ka khatam hota rahega, thik pehle dfsVisited array me usko false mark kar denge. Or DFS traversal using recursion apply karenge. In case, koi vertex visited mila to check karenge ki if (dfsVisited[vertex]) check karne k liye ki wo traversing same direction/vertex se kar raha hai ya nai. Agar true raha matlab cycle detected. Or agar false raha to matlab wo is direction se nai aaya hai.. Move ahead for detection.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 8: - Topological sort (DAG) using DFS algo
+
+Topological sort means linear ordering of vertices. If we have edges from u -> v then u should appear before v. Their can be multiple topo sort for single graph.
+Directed because linear ordering of vertices hai. Or u should be before v. directed nai hoga to pata ni chalega kaun pehle hai or kaun badme.
+Acyclic because agr cycle create hogya toh u should before v concept contradict hoga because cycle se dependency create hojaega.
+
+Traverse karenge using recursion for multiple components. Isme only difference is ek stack maintain karenge. DFS apply krne k bad agar recursion us particular vertex ka khatam hone aara to khatam krne k thik pehle usko stack me push krenge. Aise after all traversal, stack me jo set of values rahega wo topo sorted rahega.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 9: - Topological sort (DAG) using BFs algo  (Kahn's algorithm)
+
+Intuiton:
+If we have edges from u -> v then u should appear before v. Toh hum us node se chalu krenge jiska koi in-degree nai hai. Matlab wo humesha linear ordering me pehle rahega. Fir hum adj nodes dhundhenge or 1 se decrement karenge means hum is node ka dependency hata rhe hai. Toh check krenge adj nodes ka ki in degree 0 hua kya? if yes toh add kro queue me.
+
+Traverse karenge after storing value in queue for multiple components. Isme pehle in-degree of each node calculate karenge or fir zero in-degree wale vertex ko queue me add kar denge or uspr BFS start krenge. Jo adjacency list se adjacent node milta jaaega uska in-degree decrement karenge 1 se and check karenge us particular vertex k lye hi ki zero hua kya? Agr 0 hua to add in queue and keep applying bfs traversal until queue becomes empty.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 10: - Detect A cycle in a Directed Graph using BFS
+
+Apply Kahn's algorithm. Only change : find node count after topo sort and compare it with noOfVertices.
+If count is not same then graph contains a cycle. Bcoz Topological sort is DAG(directed acyclic graph).
+If graph will contain a cycle then it wont be able to have all nodes after topo sort.
+Its a hack we are using here. In interview prefer DFS approach for finding cycle in directed graph.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 11: - Number of islands (2 variations: 4 directions & 8 directions)
+
+- This question is based on Connected Component. Number of island find karna hai matlab number of connected component dhundhna hai. We know dfs/bfs traversal. Koi bhi traversal apply kr sakte hai.
+- 2 variants hai: -
+    a. 4 directions: -
+        - count variable declare karenge or isme visited k lye matrix nai banaenge alag se. Same matrix use krenge or jaha 1 rahega bfs call me usko queue me add krke usko 0 mark kr denge.
+        - 2 for loop laganege to traverse each coordinate of matrix and jaha pr bhi grid ka value 1 hoga call bfs. (This will cover all connected component wrt this coordinate). Or loop me count ko increment kr denge.
+        - bfs function me queue me coordinate add kr denge (using Pair class OR int[]) or us cooridnate ko 0 mark kr denge.
+        - dx & dy define kr lenge for moving in 4 directions.
+        - Loop lagaenge jab tk queue empty ni hojata or poll kr lenge queue se jo bhi top pr rahega. usme
+        - Fir for loop lagenge 0 to < 4 and x , y calculate krenge using int x = point[0] + dx[k]; & int y = point[1] + dy[k];
+        - Boundary condition check krenge + grid ka value agr 1 hai or agr sab barabar hai toh, wo grid ka value 0 mark kr denge or x,y pair ko queue me add kr denge.
+
+    b. 8 directions: -
+        - Everything will be on similar lines as mentioned above. Bas traversing in 4 directions ka logic halka sa tweak hoga to traverse in 8 directions
+        - agr hum eight directions k movement nikale toh humko samjhega ki row to col hum -1 to +1 movement krre hai.
+        - Isiko pakadkr apna 2 for loop lagega while loop k andar hi.. Or ek pair ko poll krne k bad. Jisko reference lekr hum 8 directions me move krenge.
+        - **Ek delRow or dursa delCol which will traverse from -1 to <=1.** (Only change in above logic)
+        - Andar ka waps sab same upar jaisa. New x,y calculate hoga : int nrow = row + delRow; int mcol = col + delCol;
+        - - Boundary condition check krenge + grid ka value agr 1 hai or agr sab barabar hai toh, wo grid ka value 0 mark kr denge or x,y pair ko queue me add kr denge.
+
+Ek or variation tha 4 direction wale me jaha adjacency matrix diya tha to hum usko adjacency list me convert kiye uske bad normal dfs traversal apply krke count find kr liye.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 12: - Bipartite Check using BFS
+
+Definition: A graph can be colored using 2 colors such that no two adjacent nodes have same color.
+
+- Same bfs traversal apply krke ek ek node traverse karenge and usko 1/0 se color kranege using (color[adjNode] = 1 - color[node];)
+- adjNode traverse krenge & adjNode ka color check krenge. Agar -1 hai toh color change krenge or queue me add krenge.
+- Par agr color -1 nai hai, it means colored hai. else if me uske parent node se color match krenge. Agar same nikla matlab adjacent nodes have same color, toh false return kr denge.
+- After all looping, we will return true. Bcoz agr Bipartite nai rahega to it would have return from else if condition.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 13: - Bipartite Check using DFS
+
+1 Same dfs traversal apply krke ek ek node traverse karenge and usko 1/0 se color kranege using (color[node] = 1 - color[currentColor];)
+2 Every iteration me color change krenge. (DFS me currentColor apan as a parameter le lenge)
+3 Fir adjNode traverse krenge & adjNode ka color check krenge. Agar -1 hai toh recursive function call krenge if statement lagakr. jisme currentNode ka color as a parameter bhej denge along with adjNode. (Step 2 se color change hoajega). Or ulta condition lagakr false return karenge. Jisse kisi bhi iteration me bipartite ni mila to false return kr denge seedha.
+4 Par agr color -1 nai hai, it means colored hai. else if me uske parent node se color match krenge. Agar same nikla matlab adjacent nodes have same color, toh false return kr denge.
+5 After all looping, we will return true. Bcoz agr Bipartite nai rahega to it would have return from else if condition.
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 22: Graph - Part II
+
+*******************************************************************************************************
+
+Problem 1: Strongly Connected Component(using KosaRaju’s algo)
+
+This algorithm is used to identify strongly connected components.
+SCC -> Each node will get visited if you start from any node within that component.
+for eg: if graph consist of edges: 1 -> 2 -> 3 -> 1 && 2 -> 4 -> 5
+SCC will be :- 1 2 3
+SCC: - 4 (bcoz of non cyclic)
+SCC: - 5 (bcoz of non cyclic)
+
+It can be found out using 3 steps:
+Step 1: Sort all nodes in order of their finishing time -> Topological sort -> refer problem 8 of previous section
+Step 2: Reversing the edge direction -> Finding transpose
+    - 2 for loop lagaenge. 1st loop(i) to iterate all nodes & second loop to iterate on adjacent node for given i. Edge ko reverse krenge using
+        for (int it : adjList.get(i)) {
+                transpose.get(it).add(i);   //Directed graph hai so single swap
+        }
+    //**Isme hum first loop k andar pr second loop k bahar visited[i] = 0 kr denge becoz 3rd step me use krna hai.
+    //Step 1 me wo visited hogya hoga.. islye waps non-visited krna hai.**
+Step 3: Do the DFS according to the finishing time -> DFS on nodes we got after topo sort in step 1.
+    - Stack values pr iterate krenge poll krke. Or agr visited nai hai toh call dfs.
+    - Ek ds carry krenge to add values of SCC in list.
+    - Jab dfs call se return aaenge last me to resultant list me add kr do ds.
+
+-------------------------------------------------------------------------------------------------------
 
