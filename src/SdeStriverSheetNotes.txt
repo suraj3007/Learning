@@ -2266,3 +2266,103 @@ Step 3: Do the DFS according to the finishing time -> DFS on nodes we got after 
 
 -------------------------------------------------------------------------------------------------------
 
+Problem 2: Dijkstra algorithm (for finding shortest path ) : It works only in cases of positive edge weights.
+
+1. Sbse pehle ek Node class banaenge which will contain v and weight. Uska cosntructor or getter method bana lo. And comparator implement kro such that it should arrange nodes in increasing order of their weight. (Minimum distance should reside at the top)
+2. Given data ko adjacency list me convert kro such that ArrayList<ArrayList<*Node*>>. This indicates u ka mapping v se along with distance //Undirected graph hai to ulta bhi add krenge.. v ka mapping u along with distance.
+3. PriorityQueue<Node> maintain kro jiske constructor me vertices k sath comparator pass kr do.
+4. dist[] array create krke sbko max value define kr lete hai.
+5. dist[source] = 0 kr denge or queue me source with 0 distance add kr denge to perform bfs: queue.add(new Node(source, 0));
+6. Ab jab tk queue empty nai hojata tab tak:
+    a. queue se node poll kro.
+    b. Adj node(it) find kro or fir check kro
+        if(node.getWeight() + it.getWeight() < dist[it.getV()]). If yes toh dist[it.getV()] = node.getWeight() + it.getWeight();
+        or fir isko hi queue me add kr do with latest distance of V: queue.add(new Node(it.getV(), dist[it.getV()]));
+7. dist[] array me apna ans ready hai. ArrayList create krke usme copy krdo and return it.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Bellman-Ford Algorithm (for finding shortest path ) : This overcomes the problem of Dijikstra algo but will not work in case of negative weighted cycle.
+
+1. Dijikstra algorithm doesn't work for negative weighted graphs.
+2. Bellman ford overcomes this problem to work with negative weighted edges.
+3. It will not work only in case of negative weighted cycle. However, it also help to detect negative weighted cycle.
+4. We have to relax all the edges by N - 1 times. After relaxing N - 1 times, distance will have the shortest path.
+formula: - if d(u) + (weight to reach to v) < d(v) then d(v) = d(u) + (weight to reach to v)
+5. However, if one more iteration further reduces the weight of edges it means that graph contains negative weighted cycle.
+6. Reason for N - 1 relaxation: - because that is the longest path, graph can have to reach from src to farthest node.
+7. for eg: 1 -> 2 -> 3 -> 4 -> 5 : - longest path to reach from 1 to 5 contains exactly N - 1 edges.
+
+Steps: -
+1. Pehle Node class bana lenge jaha u, v, weight set karenge.
+2. edges list ko node list me convert kr lenge: - ArrayList<Node>.
+3. dist array create kr lenge and source ko 0 mark kr denge.
+
+4. Loop chalaenge for n - 1 times or loop ke andar 1-1 node pick krenge using enhance for loop or condition check krenge: - if (**dist[node.getU()] != 1e9** && dist[node.getU()] + node.getWeight() < dist[node.getV()]) or agr ye satisfied hota hai toh value assign kr denge.   //infinity - (-ve edge weight) ~ infinity but code wise wo consider ni hoga. Islye ye check important hai dist[node.getU()] != 1e9
+
+5. After relaxing n - 1 times, ek flag declare kar lenge. Fir ek or baar relax karenge as per explanation above. Waps same condition apply kar lenge or agr waps distance reduce hua matlab cycle detected. Mark flag as true and break the loop.
+6. Based on flag value return kar denge.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: MST using Prim’s Algo
+Somewhat similar to Dijkstra's algorithm
+
+1. We will maintain 3 arrays: -
+    a. key : Stores the weight of vertices  -> Initialize it with max value
+    b. parent : Maintains Parent of vertices for final MST  -> Initialize it with -1
+    c. mst : Vertices considered for MST    -> by default false
+2. Node class banao or input ko u, v and weight k form me convert krke adjacency list maintain kro for undirected graph.
+3. PriorityQueue declare kro with comparator which will arrange nodes in increasing order of their weight.
+4. Since 1-based indexing, key[1] = 0 and queue.add(new Node(1, key[1]));
+5. Loop chalao jab tak queue empty ni hojata
+    a. Topmost value pop kro .getV and store it into u. iska mst[u] = true mark kro.
+    b. Fir adjacent nodes traverse kro and check kro
+        - if (!mst[node.getV()] && node.getWeight() < key[node.getV()]) then,
+        Minimal value assign kro key[node.getV()], corrsponding parent me u daalo nd queue me value push kro.
+        key[node.getV()] = node.getWeight();
+        parent[node.getV()] = u;
+        queue.add(new Node(node.getV(), key[node.getV()]));
+6. Ab apne ko output me ArrayList<ArrayList<Integer>> return krna hai in form of list of u -> v -> w. Ans upr ready hai all 3 arrays me. Usko isme set krna hai.
+7. Loop chalaenge (*2* <= n) ///2 se Because 1 is source so, it won't have any parent.
+    - ArrayList<Integer> ds declare krenge.
+    - ds.add(parent[i]);
+      ds.add(i);
+      ds.add(key[i]);
+    - add ds in res.
+8. return res.
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: MST using Kruskal’s Algo
+
+It follows Disjoint set algorithm along with Path compression.
+findParent() and union() are operation performed in Disjoint set algorithm
+Application of Disjoint set algorithm :
+1. Kruskal's algorithm 2. Finding if both nodes belong to same component or not.
+
+Steps: -
+
+1. First we will sort all edges in increasing order of their weight
+2. Declare parent & rank array. Initially declare parent vertex of each vertex as itself initially. For eg 1 -> 1, 2 -> 2, 3 -> 3 etc..
+2. After that we will iterate through all nodes and perfrom following steps: -
+    a. Check parent of u (u) & parent of v (v) as they should not be equal    //Otherwise cycle will be formed.
+    b. Add weight to costOfMst variable.
+    c. Check rank u & v & attach the lower rank node to higher rank node so that height of tree doesn't increase
+    d. In case of similar rank, we can attach any node to anyone. Also, in case of similar rank of PARENT, increase the rank of node with whom we are attaching the node.
+3. return costOfMst;
+
+-> findParent() : -
+if(node == parent[node]) { return node; }
+return parent[node] = findParent(parent[node]); //Path compression
+
+-> findUnion(): -
+a. Parent find kr lo u & v ka as u & v (reusing the variable)
+b. Attach the lower rank node to higher rank node so that height of tree doesn't increase.
+    - if (rank[u] < rank[v]) { parent[u] = v; }
+    - else if (rank[v] < rank[u]) { parent[v] = u; }
+    - else parent[v] = u; rank[u]++;
+    //in case of similar rank of PARENT, increase the rank of node with whom we are attaching the node.
+    //Here, we are attaching v with u. So, parent of v is u now. Hence, incrementing rank of u.
+
+-------------------------------------------------------------------------------------------------------

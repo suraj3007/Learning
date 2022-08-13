@@ -12,7 +12,7 @@ public class PrimsAlgorithmForMST {
     private static void primsAlgo (ArrayList<ArrayList<Node>> adj) {
         int[] key = new int[noOfVertices]; //Stores the weight of vertices
         int[] parent = new int[noOfVertices]; //Maintains Parent of vertices for final MST
-        boolean mtSet[] = new boolean[noOfVertices]; //Vertices considered for MST
+        boolean mstSet[] = new boolean[noOfVertices]; //Vertices considered for MST
 
         for(int i = 0; i < noOfVertices; i++) {
             key[i] = Integer.MAX_VALUE; //Initialize it with max value
@@ -30,12 +30,12 @@ public class PrimsAlgorithmForMST {
             //Gives minimum weight element from the top
             int u = queue.poll().getV();
             //Mark it as considered for MST
-            mtSet[u] = true;
+            mstSet[u] = true;
 
             //Check for adjacent node who is not considered for MST and
             // whose weight is lesser than already available in key array for that vertex
             for (Node it : adj.get(u)) {
-                if (!mtSet[it.getV()] && it.getWeight() < key[it.getV()]) {
+                if (!mstSet[it.getV()] && it.getWeight() < key[it.getV()]) {
                     key[it.getV()] = it.getWeight();
                     //Mark the parent for this adjacent node
                     parent[it.getV()] = u;
