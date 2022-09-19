@@ -3,7 +3,7 @@ package main.java.striversSdeSheet.Arrays.part4;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LongestConsecutive {
+public class LongestConsecutiveSequence {
 
     public static int longestConsecutive(int[] nums) {
         if (nums.length == 0)  return 0;

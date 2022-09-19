@@ -4,7 +4,7 @@ public class CloneLinkedListWithNextAndRandomPointer {
 
     public Node copyRandomList(Node head) {
         Node iter = head;
-        Node front = head;
+        Node front;
 
         // First round: make copy of each node,
         // and link them together side-by-side in a single list.

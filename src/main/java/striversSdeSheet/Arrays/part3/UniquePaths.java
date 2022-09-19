@@ -61,6 +61,6 @@ public class UniquePaths {
         } else if (arr[i][j] != 0) {
             return arr[i][j];
         }
-        return arr[i][j] = uniquePathsUsingRecursion(i + 1, j, m, n) + uniquePathsUsingRecursion(i, j + 1, m, n);
+        return arr[i][j] = uniquePathsUsingRecursionOptimized(i + 1, j, m, n, arr) + uniquePathsUsingRecursionOptimized(i, j + 1, m, n, arr);
     }
 }

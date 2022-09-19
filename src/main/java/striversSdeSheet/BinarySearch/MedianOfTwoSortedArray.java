@@ -15,18 +15,19 @@ public class MedianOfTwoSortedArray {
         while (low <= high) {
             //Find out cut1 as breaking point for array1 & cut2 as breaking point for array2
             int cut1 = (low + high) / 2;
+            //(n1 + n2 + 1) / 2) -> This will give the half of total element (works for both even & odd number of element) - cut1
             int cut2 = ((n1 + n2 + 1) / 2) - cut1;
 
             //Edge cases:
-            //If cut1 is 0 means cut1 - 1 would be outside boundary. It means not picking any element from array.
+            //If cut1 is 0 means not picking any element from array.
             //So, assign it as min value for comparison.
-            int left1 = cut1 == 0 ? Integer.MIN_VALUE : nums1[cut1 - 1];
-            int left2 = cut2 == 0 ? Integer.MIN_VALUE : nums2[cut2 - 1];
+            int left1 = cut1 == 0 ? Integer.MIN_VALUE : nums1[cut1 - 1];    //picking cut1 - 1 as left value
+            int left2 = cut2 == 0 ? Integer.MIN_VALUE : nums2[cut2 - 1];    //picking cut2 - 1 as left value
 
-            //If cut2 is n means cut1 would be outside boundary. It means not picking any element from array.
+            //If cut1 is n means picking all the elements from array. So, no element left for right half.
             //So, assign it as max value for comparison.
-            int right1 = cut1 == n1 ? Integer.MAX_VALUE : nums1[cut1];
-            int right2 = cut2 == n2 ? Integer.MAX_VALUE : nums2[cut2];
+            int right1 = cut1 == n1 ? Integer.MAX_VALUE : nums1[cut1];  //picking cut1 as right value
+            int right2 = cut2 == n2 ? Integer.MAX_VALUE : nums2[cut2];  //picking cut1 as right value
 
             //Idea is if we combine both array so, it should be sorted one.
             //If we are dividing it from any index, left half values will be smaller than right half.

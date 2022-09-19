@@ -26,8 +26,8 @@ public class MaximumOfMinimumOfEveryWindowSize {
             queue.offer(i);
             //Resultant array will start be stored once i reaches k to meet the sliding window criteria
             //and find maximum within this sliding window
-            if (i >= k - 1 && max < nums[queue.peek()]) {
-                max = nums[queue.peek()];
+            if (i >= k - 1) {
+                max = Math.max(max, nums[queue.peek()]);
             }
         }
         return max;

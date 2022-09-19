@@ -21,6 +21,7 @@ public class KthPermutationSequence {
             if (numbers.isEmpty()) {
                 break;
             }
+            //This will give the next sequence to look for from remaining list of numbers
             k = k % fact;
             fact = fact / numbers.size();
         }

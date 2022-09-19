@@ -57,6 +57,6 @@ public class VerticalOrderTraversal {
     }
 
     public static void main(String[] args) {
-
+        System.out.println('m' + 'u' + 'k' + 'e' + 'e' + 't');
     }
 }

@@ -64,13 +64,13 @@ public class WidthOfBinaryTree {
              */
             for (int i = 0; i < size; i++) {
                 Pair pair = queue.poll();
-                int curr = pair.num - min;  //To handle last level. It shouldn't start with 0.
+                int curr = pair.num - min;  //It wii ensure id starting from zero
                 Node node = pair.node;
                 if (i == 0) {
-                    first = curr;
+                    first = curr;   //Actual indexing takes place here. We just intend to find first & last
                 }
                 if (i == size - 1) {
-                    last = curr;
+                    last = curr;    //finding last. In b/w first & last, indexing is not relevant as per formula
                 }
                 if (node.prev != null) {
                     //indexing formula for left node when 0-based indexing is used.

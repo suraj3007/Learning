@@ -40,10 +40,14 @@ Problem 3: - Next Permutation:
 
 Intution with steps: -
 - From back there is an increasing sequence even for 1 element or more than 1 element. So, humko break point dhundhna hai from the back where a[i] < a[i + 1].
-Step 1: - Get index i from back where a[i] < a[i + 1] -> Code me ulta condition lagaenge
+Step 1: - Get index i from back where a[i] < a[i + 1] -> Code me ulta condition lagaenge while loop me
+int i = nums.length - 2;
+while (i >= 0 && nums[i] >= nums[i + 1]) { i--; }
 
 - Now, we want someone from back again jo current i se jyada ho to arrange in lower rank of sorted order.
-Step 2: - Get index j from back where a[j] > a[i] -> Code me ulta condition lagaenge
+Step 2: - Get index j from back where a[j] > a[i] -> Code me ulta condition lagaenge agar i >= 0 hai toh
+int j = nums.length - 1;
+while (nums[j] <= nums[i]) { j--; }
 
 - Swap i and j to arrange in lower rank
 Step 3: - Swap index i and j
@@ -281,7 +285,7 @@ You will either move down (row + 1) or go right(col + 1). Keep traversing each p
     b. Your row/column index goes beyond matrix size : if (i >= m || j >= n) so return 0 ELSe If
     c. Check if we have iterated this path before: if (arr[i][j] != 0) then return arr[i][j];
 
-return arr[i][j] = uniquePathsUsingRecursion(i + 1, j, m, n) + uniquePathsUsingRecursion(i, j + 1, m, n);
+return arr[i][j] = uniquePathsUsingRecursion(i + 1, j, m, n, arr) + uniquePathsUsingRecursion(i, j + 1, m, n, arr);
 
 -> Optimized approach (Using combinations): -
 
@@ -498,7 +502,6 @@ Problem 5: : Add 2 numbers as LinkedList
 7. Create newNode by performing mod operation on sum and enter its address to temp.next as temp.next = newNode;
 8. Move temp pointer to newly added node as temp = temp.next
 9. Outside loop, return dummy.next;
-
 
 -------------------------------------------------------------------------------------------------------
 
@@ -720,6 +723,7 @@ Steps:
     a. result[j] = i;
     b. count++;
     c. maxProfit += arr[i].profit;
+    d. break;**
 9. Outside both loops, return new int[]{count, maxProfit};
 
 -------------------------------------------------------------------------------------------------------
@@ -1427,6 +1431,177 @@ Steps: -
 -------------------------------------------------------------------------------------------------------
 *******************************************************************************************************
 
+Day 15: String: Part-I
+
+*******************************************************************************************************
+
+Problem 1: Reverse Word in A String:
+
+1. Split a string using : String[] s1 = s.split("\\s+");
+2. Create StringBuilder res. Ulta for loop lagao or words append kr lo res me : res.append(s1[i]).append(" ");
+3. return res.toString().trim();    //to remove trailing spaces due to step 2 & in general from input
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: - Longest palindrome in a String
+
+Intuition: -
+-> Brute force:
+How do we check palindrome? We take 2 pointers start & end and try to check if its equal or not. Correct? Now we have to find out longest palindromic substring, it means we have to try out all possible combinations of string. This indicates we will need 2 loops i & j. Keep i as fix which will be considered as start point and try all combinations of j which will act as end point and try figuring out if its palindrome or not. Barabar?
+
+-> Efficient approach:
+- Instead of checking palindrome using start & end pointer, lets try other way out. Take midpoint, and keep going outward. If string will be palindrome, this check will also return true. Right?? And yaha edge ho sakta hai for even length string. Toh us case me 2 midpoint hoga waha se check start kr lenge.
+-> Yahi funda apan use karenge. If we notice carefully, here we wont need 2 loops. ek hi iteration me apna kaam hojaega.
+
+Steps: -
+- Declare resultStart & resultLength as member variable. //Reason for resultLength is we have to calculate longest palindromic substring. So, we have to track the longest length.
+1. Calculate length and if its < 2 return s.  //Even 1/0 char is considered as palindrome.
+2. Start loop (start) from 0 to < length - 1.
+    - call method for odd length: expandRange(s, start, start);
+    - call method for even length: expandRange(s, start, start + 1);
+3. return s.substring(resultStart, resultStart + resultLength);
+
+-> expandRange(s, begin, end) function : -
+1. boundary condition lagaenge such that (begin >= 0 && end < s.length() && s.charAt(begin) == s.charAt(end))
+    - Move outwards: begin--; end++;
+    //Thing to notice here : Jab loop break hoga tab begin 1 index extra piche hoga or end 1 index extra aage hoga. Bcoz in indexes k char match ni hue hai. Uske pehle tak string Palindormic hai.
+2. Now we will check length (resultLength < end - begin - 1)
+    - resultStart = begin + 1;  //As per explanation above
+    - resultLength = end - begin - 1;
+
+-> Reason behind "end - begin - 1" :
+- Consider eg: ZABBAV :- Jab loop break hoga toh begin will be at 0 & end will be at 5. But actual palindromic string is from 1 to 4. -> Means 4 characters. But if we find difference b/w end & start as 4 - 1 = 3. So, we always add 1 to get the inclusive length. -> End - Begin + 1
+
+- While finding inclusive length between two points you have to add 1 to its difference. eg. ZABBAV will be 4 - 1 + 1 = 4 chars long . You did "begin--" and "end++" before you break out of while loop which offsets the begin-end range by 2 units. Your correct start is "begin + 1" and correct end is "end - 1". The inclusive length of the substring thus is (end - 1) - (begin + 1) + 1 (due to inclusive range) which is equal to "end - begin - 1".
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Roman numbers to integers
+I can be placed before V (5) and X (10) to make 4 and 9.
+X can be placed before L (50) and C (100) to make 40 and 90.
+C can be placed before D (500) and M (1000) to make 400 and 900.
+
+Intuition: -
+There is a pattern if we notice carefully, agar String me next character bada hai toh apne ko subtract krna hai. Otherwise baki saare cases me humko add krna hai. Yahi trick apan use krenge.
+
+Steps: -
+1. Map bana lenge <*Character*, Integer> ka.
+2. Loop lagaenge 0 to < length or if else check krenge
+    - Agar next char bada hai toh subtract:  if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1)))
+        result += map.get(s.charAt(i)) - (2 * map.get(s.charAt(i - 1)));
+        //2 * because we added wrong number then to correct it we have to remove it. Also, we have to subtract that number
+        //for eg: For 90, XC -> 10 added, then we identified C -> 100 added became 110,
+        //But 100 > 10 so, we should have subtracted. Hence, 2 * 10 will get subtracted to correct it.
+    - Else perform addition: result += map.get(s.charAt(i));
+3. return result;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: - Integer to Roman
+
+Intuition: -
+- Yaha hum direct 1-1 mapping kar sakte hai. Around 3000 limit tak ke hi integers ko apan kar sakte hai roman me. So, upper limit is 3000.
+- Agar hum integer me se each digit nikal le or uska roman find kar le to apne ko overall roman number mil jaaega.
+- For Eg: - 24 -> XXIV , 324 -> CCCXXIV , 2324 -> MMCCCXXIV
+- Ab isme agar dhyan de, toh 24 ka value sab me same hai.. second eg me 324 hua toh hundreds place pr 300 ke lye 3 'C' aagya, Fir waps tens place par 20 ke lye 2 'X', or fir unit place pr 4 ke lye IV
+
+Steps: -
+1. Create mapping for each positions: thousands, hundreds, tens, units
+String[] thousands = {"", "M", "MM", "MMM"};
+String[] hundreds = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+String[] tens = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+String[] units = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+2. Find out digit on each position and concatenate the mapping.
+return thousands[num / 1000] + hundreds[(num % 1000) / 100] + tens[(num % 100) / 10] + units[num % 10];
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: - Longest Common "Prefix"
+
+Intuition:
+- Character by character check krenge ki array ke saare Strings me wo character se match hora ya nai.
+- Edge case dhyan denge ki index se check kr lenge ki kisi string k length se wo bahar to nai jaara other ArrayIndexOutOfBoundException.
+
+Steps: -
+1. StringBuilder res define kr lenge. Negative scenario check kr lenge. agr strs null hai ya size 0 hai so return res as empty string.
+2. index = 0 declare kr lenge.
+3. 2 for loops lagega. Pehla: Array ke pehle String ko fix kar lenge to get character and compare it with other String element's character: - for (char c : strs[0].toCharArray())
+    - Dusra loop which will run from 1 to < length.
+        a. Check if (index >= strs[i].length() || c != strs[i].charAt(index)) then return res.
+    - Dusre loop ke bahar par pehle loop ke andar, wo character ko res me add kar lenge. Because agr wo character ni hota to upar wale check me hi res return hojata.
+    - **index++;**
+4. return res;
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 6: -
+
+-------------------------------------------------------------------------------------------------------
+*******************************************************************************************************
+
+Day 16: String: Part-II
+
+*******************************************************************************************************
+
+Problem 1: - Z-Function
+Needle variable ka string haystack variable me match find krke uske occurence ka first index return karna hai.
+
+Intuition: -
+- 2 pointers approach use karenge. pointer1 haystack k character ko scan krega and pointer2 needle ke characters ka.
+- pointer1 will increase by 1 in every step. Or jaise hi char match mila pointer2 se which will be pointing at first character, wahi se pointer2 bhi increment krenge.
+- Agar kuch characters match hone k bad nai match hua koi character toh pointer2 ko waps se us index par le aaenge jaha se first occurence mila tha using pointer1 -= pointer2.
+- Or isi iteration me pointer1 increment hoga toh wo next index pr move kr jaega.
+
+Steps: -
+1. Declare 2 pointers : pointer1 & pointer2
+2. Start looping till (pointer1 < haystack.length())
+    a. Check if character is not matching: if (haystack.charAt(pointer1) != needle.charAt(pointer2)){
+        - Bring pointer1 back to index where first occurrence found : pointer1 -= pointer2;
+        - Mark pointer2 as 0.
+    b. Else pointer2++
+    c. Outside if else, pointer1++; as it will move to next index in every iteration
+    d. Check if (pointer2 == needle.length())   //to check if all needle's element matched
+        return pointer1 - pointer2; //Start index of occurrence.
+3. return -1;   //If pattern not found
+
+
+-> Coding ninja variation: - To find count of all patterns found
+Also pay attention for scenarios : //s = aabbbb, p = bb :- **output -> 3 and not 2.**
+
+- Here, we will introduce count variable to store the result. Most of the part will remain same with small tweak.
+- To handle above scenario, we have to move pointer1 back to first occurence of in "s" and pointer2 = 0 once match is found. So, basically we are repeating step 2.a.i again.
+- Hence, we will modify if statement as : (pointer2 == m || s.charAt(pointer1) != p.charAt(pointer2)) //m is length of p
+- We will modify 2.d step as count++ instead of return if (pointer2 == m)
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 2: Same as above
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 3: Minimum characters needed to be inserted in the beginning to make it palindromic
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 4: Check for Anagrams
+
+- Pehle string ko charArray me convert kro and uske ascii value ko add kro as total += (c * c) % 26;
+- Fir dusre String ko charArray me convert kro and uske ascii value ko total me se minus karo as total -= (c * c) % 26;
+- return total == 0;
+
+-> (c * c) % 26; because apna hash function likh rhe hai to avoid possibility of collision. % 26 because of 2 reasons
+    i. Total characters are 26.
+    ii. This will give the remainder in range of 0 to 25 on squares. So, it wont exceed int maximum limit
+
+-------------------------------------------------------------------------------------------------------
+
+Problem 5: Count and Say
+
+-------------------------------------------------------------------------------------------------------
+
+*******************************************************************************************************
+
 Day 17: Binary Tree: Part-I
 
 *******************************************************************************************************
@@ -1467,11 +1642,18 @@ d. Wapas se while loop jab tak stack2 empty nai hojata and keep popping value an
 
 Problem 4: In-order Morris Traversal: (Left-Root-Right) Morris traversal also known as threaded binary tree.
 
+Normal inOrder traversal have Time complexity as O(n) & space complexity as O(n). But Morris traversal have Time complexity as O(n) & space complexity as O(1)
+
+Yaha par hum log thread islye bana rahe to traverse back to parent node. Recursion me wo bactrack hota tha to automatic care hojata tha. Iterative me stack se trace kar lete the. But yaha hum O(1) space me krre hai so to taverse back to parent node we are creating thread.
+
+Threading left ke rightmost node se root node kyu? Because in inorder traversal, we move left root right.
+After visiting rightmost node of left subtree, control goes to root node and then we move right. This is the reason.
+
 Steps: -
 
 Take curr as root node & start looping while curr != null and handle 3 below cases: -
-1st case: if left is null, add current node (leftmost node) into list and go right
-2nd case: before going left, take left node in prev and make right most node on left subtree connected to current node, then go left
+1st case: if left is null, add current node (root node of sub tree) into list and go right
+2nd case: before going left, take left node in prev variable and make right most node on left subtree connected to current node, then go left
 3rd case: if thread is already pointed to current node, then remove the thread. **Add current node (ROOT)** into list and go to right.
 
 -------------------------------------------------------------------------------------------------------
@@ -1483,6 +1665,7 @@ Steps: -
 Take curr as root node & start looping while curr != null and handle 3 below cases: -
 1st case: if left is null, add current node (leftmost node) into list and go right
 2nd case: before going left, take left node in prev and make right most node on left subtree connected to current node, **add current node (ROOT) into list** then go left
+//Yaha par 2nd step me hi add kar rhe hai because curr root par hi rehta hai.. After creating thread we move to left. So add root then move left as per PreOrder.
 3rd case: if thread is already pointed to current node, then remove the thread and go to right.
 
 -------------------------------------------------------------------------------------------------------
@@ -1636,7 +1819,7 @@ Steps: -
 
 Problem 2: Height of a Binary Tree (Maximum depth of binary tree)
 
-Intuition: Agar root par hai hum so what we will intend to find, 1 + max(l, h) sub tree. Barabar?? To fir pehle move krenge left. Jaise hi leaf node mila to return 0 (This will be our base condition). Then, will move right. Jaise hi leaf node mila return 0. Fir 1 + max(l, h). Aise recursively sub tree ka height find krte hue root tak aaege.
+Intuition: Agar root par hai hum so what we will intend to find, 1 + max(l, r) sub tree. Barabar?? To fir pehle move krenge left. Jaise hi leaf node mila to return 0 (This will be our base condition). Then, will move right. Jaise hi leaf node mila return 0. Fir 1 + max(l, h). Aise recursively sub tree ka height find krte hue root tak aaege.
 
 Steps:
 1. Base condition: if (root == null) return 0.
@@ -1659,7 +1842,7 @@ Steps: -
     - Right subtree ka height find krne k lye right move krenge: int rh = maxDepth(root.right, diameter);
     - Ab maximum length find krenge by adding lh + rh: **diameter[0] = Math.max(diameter[0], lh + rh);**
     - Will return the height of subtree: - return Math.max(lh, rh) + 1;
-3. return diameter[0];
+3. return diameter[0];  //Actual ans is stored here and hence this will be returned
 
 -------------------------------------------------------------------------------------------------------
 
@@ -1969,7 +2152,7 @@ Predecessor matlab key value se just 1 chota value. (immediate smaller)
 -------------------------------------------------------------------------------------------------------
 *******************************************************************************************************
 
-Day 20: Binary Search Tree - Part II
+Day 21: Binary Search Tree - Part II
 
 *******************************************************************************************************
 
@@ -2086,7 +2269,7 @@ We will be appying level order traversal and adding n for null and delimiter wil
 -------------------------------------------------------------------------------------------------------
 *******************************************************************************************************
 
-Day 22: Graph - Part I
+Day 23: Graph - Part I
 
 -> Coding ninja me edges[][] diya hai sirf toh create adjacency matrix.
 
@@ -2174,7 +2357,7 @@ Traverse karenge using recursion for multiple components. Isme only difference i
 
 Problem 9: - Topological sort (DAG) using BFs algo  (Kahn's algorithm)
 
-Intuiton:
+Intuition:
 If we have edges from u -> v then u should appear before v. Toh hum us node se chalu krenge jiska koi in-degree nai hai. Matlab wo humesha linear ordering me pehle rahega. Fir hum adj nodes dhundhenge or 1 se decrement karenge means hum is node ka dependency hata rhe hai. Toh check krenge adj nodes ka ki in degree 0 hua kya? if yes toh add kro queue me.
 
 Traverse karenge after storing value in queue for multiple components. Isme pehle in-degree of each node calculate karenge or fir zero in-degree wale vertex ko queue me add kar denge or uspr BFS start krenge. Jo adjacency list se adjacent node milta jaaega uska in-degree decrement karenge 1 se and check karenge us particular vertex k lye hi ki zero hua kya? Agr 0 hua to add in queue and keep applying bfs traversal until queue becomes empty.
@@ -2237,7 +2420,7 @@ Problem 13: - Bipartite Check using DFS
 -------------------------------------------------------------------------------------------------------
 *******************************************************************************************************
 
-Day 22: Graph - Part II
+Day 24: Graph - Part II
 
 *******************************************************************************************************
 

@@ -13,7 +13,7 @@ public class ThreeSum {
         List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length - 2; i++) {
-            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
+            if (i == 0 || nums[i] != nums[i - 1]) {
                 int low = i + 1, high = nums.length  - 1, sum = -nums[i];
                 while (low < high) {
                     if (nums[low] + nums[high] == sum) {

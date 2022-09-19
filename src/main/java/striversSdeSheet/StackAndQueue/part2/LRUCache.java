@@ -7,20 +7,20 @@ import java.util.Map;
 public class LRUCache {
 
     private int size;
-    LinkedHashMap<Integer, Integer> map;
+    private LinkedHashMap<Integer, Integer> map;
     public LRUCache(int capacity) {
         this.map = new LinkedHashMap<>(capacity, 0.75f, true);
         this.size = capacity;
     }
 
     public int get(int key) {
-        if (!map.containsKey(key)) {
-            return -1;
-        }
-        int value = map.get(key);
-        map.remove(key);
-        map.put(key, value);
-        return value;
+//        if (!map.containsKey(key)) {
+//            return -1;
+//        }
+//        int value = map.get(key);
+//        map.remove(key);
+//        map.put(key, value);
+        return map.getOrDefault(key, -1);
     }
 
     public void put(int key, int value) {
