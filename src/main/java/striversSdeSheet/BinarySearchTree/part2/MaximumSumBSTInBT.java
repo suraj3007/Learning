@@ -28,7 +28,8 @@ public class MaximumSumBSTInBT {
     }
 
     public static void main(String[] args) {
-
+        int[] ans = new int[]{0};
+        System.out.println(ans[0]);
     }
 }
 

@@ -12,7 +12,7 @@ public class ZFunction {
         while (pointer1 < haystack.length()) {
             if (haystack.charAt(pointer1) != needle.charAt(pointer2)){
                 //This will bring back pointer1 to the index where it found first character match.
-                //And pointer1++ at line 19 will move it to next index and it will start scanning again
+                //And pointer1++ at line 22 will move it to next index and it will start scanning again
                 //from next index to find a match with first character of needle
                 pointer1 -= pointer2;
                 pointer2 = 0;

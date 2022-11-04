@@ -56,7 +56,8 @@ public class NumberOfIslands {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == '1') {
                     count++;
-                    bfs(grid, i, j);
+                    grid[i][j] = '0';
+                    bfs2(grid, i, j);
                 }
             }
         }

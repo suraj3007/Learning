@@ -12,7 +12,7 @@ public class MorrisInOrderAndPreOrderTraversal {
         TreeNode curr = root;
         while (curr != null) {
             if (curr.left == null) {
-                inOrder.add(curr.val);
+                inOrder.add(curr.val); //root added. Wo root node add hoga jiska left node null hai
                 curr = curr.right;
             } else {
                 TreeNode prev = curr.left;
@@ -25,7 +25,7 @@ public class MorrisInOrderAndPreOrderTraversal {
                     curr = curr.left;
                 } else {
                     prev.right = null;
-                    inOrder.add(curr.val);
+                    inOrder.add(curr.val); //root added. Wo root node add hoga jiska left traversal complete ho chuka ho
                     curr = curr.right;
                 }
             }
@@ -48,6 +48,8 @@ public class MorrisInOrderAndPreOrderTraversal {
 
                 if (prev.right == null) {
                     prev.right = curr;
+                    //thread banane k bad add root node immediately. because this is the moment you are at root node.
+                    //and will move on to left side. PreOrder is Root-L-R. So, adding root and moving left. barabar?
                     preOrder.add(curr.val);
                     curr = curr.left;
                 } else {

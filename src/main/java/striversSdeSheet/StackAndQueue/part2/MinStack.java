@@ -14,7 +14,7 @@ public class MinStack {
     }
 
     public void push(int val) {
-        Long value = Long.valueOf(val);
+        Long value = (long) val;
         if (stack.isEmpty()) {
             stack.push(value);
             mini = value;

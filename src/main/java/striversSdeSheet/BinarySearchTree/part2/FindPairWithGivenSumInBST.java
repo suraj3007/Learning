@@ -56,9 +56,9 @@ class BSTIterator2 {
         while (node != null) {
             stack.push(node);
             if (isReverse) {
-                stack.push(node.right);
+                node = node.right;
             } else {
-                stack.push(node.left);
+                node = node.left;
             }
         }
     }

@@ -1,6 +1,7 @@
 package main.java.striversSdeSheet.Graphs.part1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -23,9 +24,10 @@ public class BiPartiteCheckUsingDFS {
         }
 
         int[] color = new int[edges.size()];
-        for (int i = 0; i < edges.size(); i++) {
+        Arrays.fill(color, -1);
+        /*for (int i = 0; i < edges.size(); i++) {
             color[i] = -1;
-        }
+        }*/
 
         for (int i = 0; i < edges.size(); i++) {
             if (color[i] == -1 && (!checkDfs(i, adjList, color, 0))) {

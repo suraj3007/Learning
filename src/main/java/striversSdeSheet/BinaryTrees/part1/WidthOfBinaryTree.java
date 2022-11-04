@@ -56,15 +56,15 @@ public class WidthOfBinaryTree {
             /** Indexes: -
              *              0
              *             / \
-             *           0   1
+             *           1   2
              *          / \ / \
-             *         0  1 2 3
+             *         1  2 3 4
              *           /     \
-             *          2       7
+             *          3       8
              */
             for (int i = 0; i < size; i++) {
                 Pair pair = queue.poll();
-                int curr = pair.num - min;  //It wii ensure id starting from zero
+                int curr = pair.num - min;  //It will ensure id starting from zero
                 Node node = pair.node;
                 if (i == 0) {
                     first = curr;   //Actual indexing takes place here. We just intend to find first & last
@@ -73,15 +73,15 @@ public class WidthOfBinaryTree {
                     last = curr;    //finding last. In b/w first & last, indexing is not relevant as per formula
                 }
                 if (node.prev != null) {
-                    //indexing formula for left node when 0-based indexing is used.
+                    //indexing formula for left node when 1-based indexing is used.
                     queue.add(new Pair(node.prev, curr*2+1));
                 }
                 if (node.next != null) {
-                    //indexing formula for right node when 0-based indexing is used.
+                    //indexing formula for right node when 1-based indexing is used.
                     queue.add(new Pair(node.next, curr*2+2));
                 }
             }
-            ans = Math.max(ans, last - first + 1); //Last index - first index + 1 -> max width b/w 2 nodes
+            ans = Math.max(ans, last - first + 1); //Last index - first index + 1 -> max width b/w 2 nodes inclusive
         }
         return ans;
     }
