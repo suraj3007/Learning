@@ -22,7 +22,7 @@ public class SplitArrayIntoChunk {
 
     public static List<int[]> splitArray(int[] array, int splitSize) {
         List<int[]> list = new ArrayList<>();
-        for(int i = 0; i<array.length; i = i + splitSize){
+        for(int i = 0; i < array.length; i = i + splitSize){
             list.add(Arrays.copyOfRange(array, i, Math.min(array.length, i + splitSize)));
         }
         return list;
